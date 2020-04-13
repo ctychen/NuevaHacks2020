@@ -4,17 +4,19 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public abstract class Person {
+public abstract class Pet {
 
-	protected boolean isInfected;
-	protected double risk;
 	protected int x;
 	protected int y;
 	protected int xi;
 	protected int yi;
 	protected PImage icon;
 	
-	public Person() {
+	protected enum Type {
+		CAT, DOG, TURTLE, NINETAILFOX; // Change this lol
+	}
+	
+	public Pet() {
 		
 	}
 	
