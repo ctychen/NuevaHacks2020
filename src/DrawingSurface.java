@@ -29,7 +29,9 @@ public class DrawingSurface extends PApplet {
 	public void mouseDragged() {
 
 	}
-
+	
+    // List of keycodes here: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list/31637206
+	// Useful keycodes: 16-Shift, 17-Ctrl, 18-Alt, 20-Caps, 27-Esc, 32-Space, 33-PageUp, 34-PageDown, 35-End, 36-Home, 48-57 is numbers 0-9, 65-90 is A-Z, 96-105 is numpad 0-9, 112-123 is F1-F12, 127-Del  
 	public void keyPressed() {
 		if (keyCode == 38) { // up arrow
 
