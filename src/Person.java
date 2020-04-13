@@ -18,5 +18,9 @@ public abstract class Person {
 		
 	}
 	
+	public void addPet(Pet.Type type) {
+		
+	}
+	
 	
 }
