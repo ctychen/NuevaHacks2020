@@ -3,7 +3,6 @@ import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
 
-
 	public DrawingSurface() {
 
 	}
@@ -30,14 +29,14 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void keyPressed() {
-		if(keyCode == 38) { // up arrow
-			
-		} else if(keyCode == 37) { // left arrow
-			
-		} else if(keyCode == 40) { // down arrow
-			
-		} else if(keyCode == 39) { // right arrow
-			
+		if (keyCode == 38) { // up arrow
+
+		} else if (keyCode == 37) { // left arrow
+
+		} else if (keyCode == 40) { // down arrow
+
+		} else if (keyCode == 39) { // right arrow
+
 		}
 
 	}
