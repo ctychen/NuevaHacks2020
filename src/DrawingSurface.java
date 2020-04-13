@@ -3,6 +3,8 @@ import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
 
+	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that keycode is true, when it is released it gets set to false
+	
 	public DrawingSurface() {
 
 	}
@@ -38,11 +40,36 @@ public class DrawingSurface extends PApplet {
 		} else if (keyCode == 39) { // right arrow
 
 		}
-
+		
+		if (keyCode == 87)  //This little chain of if-else statements is so that you can use either arrow keys or WASD
+			keyCode = this.UP;
+		else if (keyCode == 65)
+			keyCode = this.LEFT;
+		else if (keyCode == 83)
+			keyCode = this.DOWN;
+		else if (keyCode == 68)
+			keyCode = this.RIGHT;
+		
+		keys[keyCode] = true;
+		
 	}
 
 	public void keyTyped(KeyEvent k) {
 
+	}
+	
+	public void keyReleased() {
+		
+		if (keyCode == 87)  //This little chain of if-else statements is so that you can use either arrow keys or WASD
+			keyCode = this.UP;
+		else if (keyCode == 65)
+			keyCode = this.LEFT;
+		else if (keyCode == 83)
+			keyCode = this.DOWN;
+		else if (keyCode == 68)
+			keyCode = this.RIGHT;
+		
+		keys[keyCode] = false;
 	}
 
 }
