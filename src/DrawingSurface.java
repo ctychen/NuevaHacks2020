@@ -15,10 +15,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class DrawingSurface extends PApplet {
 
-	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair"};
-	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter"};
+	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair", "Another Hat Guy"};
+	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter", "Another yeeter with a hat"};
 	
-	private PImage[] picChar = new PImage[6];
+	
 	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
 												// keycode is true, when it is released it gets set to false
@@ -29,7 +29,9 @@ public class DrawingSurface extends PApplet {
 	
 	public static int phase = BEGINING;
 	
-	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 3;
+	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 4;
+	
+	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
 	Clock fancyClock = Clock.systemDefaultZone();
 	
@@ -60,12 +62,10 @@ public class DrawingSurface extends PApplet {
 	// The statements in the setup() function
 	// execute once when the program begins
 	public void setup() {
-		picChar[0] = loadImage("people" + FileIO.fileSep + "p1frontstep1.png");
-		picChar[1] = loadImage("people" + FileIO.fileSep + "p1frontstep2.png");
-		picChar[2] = loadImage("people" + FileIO.fileSep + "p2frontstep1.png");
-		picChar[3] = loadImage("people" + FileIO.fileSep + "p2frontstep2.png");
-		picChar[4] = loadImage("people" + FileIO.fileSep + "p3frontstep1.png");
-		picChar[5] = loadImage("people" + FileIO.fileSep + "p3frontstep2.png");
+		for (int i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++) {
+			picChar[i*2] = loadImage("people" + FileIO.fileSep + "p" + (i+1) + "frontstep1.png");
+			picChar[i*2+1] = loadImage("people" + FileIO.fileSep + "p" + (i+1) + "frontstep2.png");
+		}
 		try {
 			File audioFile = new File("sound" + FileIO.fileSep + "run.wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -104,7 +104,7 @@ public class DrawingSurface extends PApplet {
 			textAlign(LEFT);
 			textSize(width*0.02f);
 			text("Choose your character", width*0.01f, height*0.04f);
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++)
 				image(picChar[2*i+zeroOrOne], width*0.2f*i, 1*height*0.25f, width*0.2f, width*0.25f);
 		} else {
 			textAlign(LEFT);
