@@ -34,11 +34,7 @@ public class DrawingSurface extends PApplet {
 	Clock fancyClock = Clock.systemDefaultZone();
 	
 	short selected = -1;
-	
-	private String playerIconPath; // i dont think its too good of an idea to store this as a string, especially in this class
-	
-	
-	
+
 
 	public static enum Direction { // wow, an enum? boi this aint c#
 		UP(0), DOWN(1), LEFT(2), RIGHT(3);
@@ -122,27 +118,10 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void choosePlayer(int id) { // shouldnt this be in the player class? oh wait, i just added it there
-		switch (id) {
-		case 1:
-			this.playerIconPath = "players" + FileIO.fileSep + "p1front.png";
-		case 2:
-			this.playerIconPath = "players" + FileIO.fileSep + "p2front.png";
-		case 3:
-			this.playerIconPath = "players" + FileIO.fileSep + "p3front.png";
-		}
-
 	}
 
 	public void standStill() {
-		if (currentMovingDirection == Direction.UP) {
-			playerIconPath = "";
-		} else if (currentMovingDirection == Direction.LEFT) {
-			playerIconPath = "";
-		} else if (currentMovingDirection == Direction.RIGHT) {
-			playerIconPath = "";
-		} else if (currentMovingDirection == Direction.DOWN) {
-			playerIconPath = "";
-		}
+
 	}
 	
 	public void mousePressed() { //Yeet, I like them triangles

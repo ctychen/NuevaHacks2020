@@ -18,6 +18,7 @@ public abstract class Person {
 	protected PImage[] backIcons;
 	protected PImage currentIcon;
 	protected int id;
+	protected DrawingSurface.Direction currentMovingDirection;
 
 	public Person() {
 
@@ -55,6 +56,17 @@ public abstract class Person {
 		};
 	}
 
+	public void standStillIcon(PApplet p, int i) {
+		if (currentMovingDirection == DrawingSurface.Direction.UP) {
+			currentIcon = frontIcons[0];
+		} else if (currentMovingDirection == DrawingSurface.Direction.LEFT) {
+			currentIcon = leftIcons[0];
+		} else if (currentMovingDirection == DrawingSurface.Direction.RIGHT) {
+			currentIcon = rightIcons[0];
+		} else if (currentMovingDirection == DrawingSurface.Direction.DOWN) {
+			currentIcon = backIcons[0];
+		}
+	}
 
 	public void moveUpIcon(PApplet p, int i) {
 		if (i % 20 == 0) {
