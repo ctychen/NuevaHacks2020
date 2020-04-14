@@ -65,7 +65,7 @@ public class DrawingSurface extends PApplet {
 			playerIconPath = "";
 		}
 	}
-
+	
 	public void mousePressed() {
 
 	}
