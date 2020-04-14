@@ -64,12 +64,12 @@ public class DrawingSurface extends PApplet {
 	// The statements in the setup() function
 	// execute once when the program begins
 	public void setup() {
-		picChar[0] = loadImage("players" + FileIO.fileSep + "p1frontstep1.png");
-		picChar[1] = loadImage("players" + FileIO.fileSep + "p1frontstep2.png");
-		picChar[2] = loadImage("players" + FileIO.fileSep + "p2front.png");
-		picChar[3] = loadImage("players" + FileIO.fileSep + "p2front.png");
-		picChar[4] = loadImage("players" + FileIO.fileSep + "p3frontstep1.png");
-		picChar[5] = loadImage("players" + FileIO.fileSep + "p3frontstep2.png");
+		picChar[0] = loadImage("people" + FileIO.fileSep + "p1frontstep1.png");
+		picChar[1] = loadImage("people" + FileIO.fileSep + "p1frontstep2.png");
+		picChar[2] = loadImage("people" + FileIO.fileSep + "p2frontstep1.png");
+		picChar[3] = loadImage("people" + FileIO.fileSep + "p2frontstep2.png");
+		picChar[4] = loadImage("people" + FileIO.fileSep + "p3frontstep1.png");
+		picChar[5] = loadImage("people" + FileIO.fileSep + "p3frontstep2.png");
 		try {
 			File audioFile = new File("sound" + FileIO.fileSep + "run.wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
