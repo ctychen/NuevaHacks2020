@@ -3,15 +3,11 @@ import processing.core.PImage;
 
 public class Player extends Person{
 	
-	int id; // 0->weirdo, 1->hat guy, 2->cool hair
-	
-	PImage[] playerIcon = new PImage[12]; 
-	
 	public Player(int id) {
 		//Yeet
 	}
 	
-	public void loadImages(PApplet g) {
+	/*public void loadImages(PApplet g) {
 		playerIcon[0] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "front.png");
 		playerIcon[1] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "frontstep1.png");
 		playerIcon[2] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "frontstep2.png");
@@ -24,7 +20,7 @@ public class Player extends Person{
 		playerIcon[9] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "back.png");
 		playerIcon[10] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "backstep1.png");
 		playerIcon[11] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "backstep2.png");
-	}
+	}*/
 	
 	public void draw(PApplet g) {
 		
