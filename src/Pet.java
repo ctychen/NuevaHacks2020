@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public abstract class Pet {
+public class Pet {
 
 	protected int x;
 	protected int y;
