@@ -72,24 +72,24 @@ public abstract class Person {
 
 	public void setImageIcons(PApplet p) {
 		frontIcons = new PImage[] { 
+				p.loadImage("people" + FileIO.fileSep + "p" + id + "front.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep1.png") 
+				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep2.png") 
 			};
 		leftIcons = new PImage[] {
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "left.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "leftstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "leftstep1.png")
+				p.loadImage("people" + FileIO.fileSep + "p" + id + "leftstep2.png")
 		};
 		rightIcons = new PImage[] {
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "right.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "rightstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "rightstep1.png")
+				p.loadImage("people" + FileIO.fileSep + "p" + id + "rightstep2.png")
 		};
 		backIcons = new PImage[] {
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "back.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep1.png")
+				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep2.png")
 		};
 	}
 
