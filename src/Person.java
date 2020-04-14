@@ -8,6 +8,7 @@ public abstract class Person {
 
 	protected boolean isInfected;
 	protected double risk;
+	protected double initRisk; // max risk should be 100 or something 
 	protected int x;
 	protected int y;
 	protected int xi;
@@ -19,6 +20,8 @@ public abstract class Person {
 	protected PImage currentIcon;
 	protected int id;
 	protected DrawingSurface.Direction currentMovingDirection;
+	protected int normalSpeed;
+	protected int maxSpeed;
 
 	public Person() {
 
@@ -27,6 +30,40 @@ public abstract class Person {
 	public Person(int id) {
 		// all the image filenames are like p1front or p3left, so ID for choosing the
 		// image
+		switch(id) {
+		case 1: // blue haired person
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			// ... //
+		case 2: // blue hat guy
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			// ... //
+		case 3: // green fancy guy
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			// ... //
+		case 4: // red hat guy
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			// ... //
+		case 5: // boomer 1
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			// ... //
+		// ... etc
+		}
+		currentMovingDirection = DrawingSurface.Direction.UP;
+		// TODO set init pos
+		
+		
+		this.x = xi;
+		this.y = yi;
 	}
 
 	public void addPet(Pet.Type type) {
@@ -69,6 +106,7 @@ public abstract class Person {
 	}
 
 	public void moveUpIcon(PApplet p, int i) {
+		y+=normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = frontIcons[1];
 		} else if (i % 10 == 0) {
@@ -77,6 +115,7 @@ public abstract class Person {
 	}
 
 	public void moveLeftIcon(PApplet p, int i) {
+		x-=normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = leftIcons[1];
 		} else if (i % 10 == 0) {
@@ -85,6 +124,7 @@ public abstract class Person {
 	}
 
 	public void moveRightIcon(PApplet p, int i) {
+		x+=normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = rightIcons[1];
 		} else if (i % 10 == 0) {
@@ -93,6 +133,7 @@ public abstract class Person {
 	}
 
 	public void moveDownIcon(PApplet p, int i) {
+		y-=normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = backIcons[1];
 		} else if (i % 10 == 0) {
