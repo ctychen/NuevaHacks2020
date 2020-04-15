@@ -1,7 +1,10 @@
 import processing.event.KeyEvent;
+import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +17,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFrame;
 
 public class DrawingSurface extends PApplet {
 
@@ -105,8 +109,9 @@ public class DrawingSurface extends PApplet {
 	// sequence and after the last line is read, the first
 	// line is executed again.
 	public void draw() {
-		if (phase == BEGINNING)
+		if (phase == BEGINNING) {
 			drawSelection();
+		}
 		else if (phase == PLAYING) {
 			clear();
 			if(player.x >= width*0.5f && player.x <= map.maxX()*width*0.05f-width*0.5f)
@@ -166,8 +171,16 @@ public class DrawingSurface extends PApplet {
 			textSize(width*0.02f);
 			text("Choose your character", width*0.01f, width*0.02f);
 			for (int i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++)
-				image(picChar[2*i+zeroOrOne], width*0.2f*(i%CHARACTERS_PER_ROW), width*0.25f*(0.1f+(int)(i/CHARACTERS_PER_ROW)), width*0.2f, width*0.25f);
-				
+				image(picChar[2*i+zeroOrOne], width*0.2f*(i%CHARACTERS_PER_ROW), width*0.25f*(0.1f+(int)(i/CHARACTERS_PER_ROW)), width*0.2f, width*0.25f);	
+			fill(0);
+			textSize(width*(float)Math.random()*0.03f+0.05f*width);
+			translate(width/6 - 100, height/6 - 90);
+			fill((int)(100 + (Math.random()*155)), (int)(100 + (Math.random()*155)), (int)(100 + (Math.random()*155)));
+			text("Social Distancing...", width*0.2f+(int)(Math.random()*10), height/2 + (int)(Math.random()*10));
+			textSize(width*(float)Math.random()*0.02f+0.02f*width);
+			text("...The Game!", width*0.2f+(int)(Math.random()*10), height/2 + height/8 + (int)(Math.random()*10));
+			text("Press I for Instructions!", width*0.2f+(int)(Math.random()*10), height/2 + 2*height/8 + (int)(Math.random()*10));
+			text("Press X for About and Help", width*0.2f+(int)(Math.random()*10), height/2 + 3*height/8 + (int)(Math.random()*10));
 		} else {
 			textAlign(LEFT);
 			textSize(width*0.02f);
@@ -178,6 +191,40 @@ public class DrawingSurface extends PApplet {
 		}
 		
 	}
+	
+	public void displayInstructions() {
+		Instructions instr = new Instructions();
+		PApplet.runSketch(new String[] { "" }, instr);
+		PSurfaceAWT surf = (PSurfaceAWT) instr.getSurface();
+		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+		JFrame window = (JFrame) canvas.getFrame();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		window.setSize(instr.DRAWING_WIDTH, instr.DRAWING_HEIGHT);
+		window.setMinimumSize(new Dimension(100, 100));
+		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		window.setResizable(true);
+		window.setLocation(screenSize.width / 2 - window.getSize().width / 2,
+				screenSize.height / 2 - window.getSize().height / 2);
+
+		window.setVisible(true);
+	}
+	
+	public void displayAbout() {
+		About a = new About();
+		PApplet.runSketch(new String[] { "" }, a);
+		PSurfaceAWT surf = (PSurfaceAWT) a.getSurface();
+		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+		JFrame window = (JFrame) canvas.getFrame();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		window.setSize(a.DRAWING_WIDTH, a.DRAWING_HEIGHT);
+		window.setMinimumSize(new Dimension(100, 100));
+		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		window.setResizable(true);
+		window.setLocation(screenSize.width / 2 - window.getSize().width / 2,
+				screenSize.height / 2 - window.getSize().height / 2);
+		window.setVisible(true);
+	}
+	
 
 	public void choosePlayer(int id) { // shouldnt this be in the player class? oh wait, i just added it there
 	}
@@ -214,16 +261,25 @@ public class DrawingSurface extends PApplet {
 	// 33-PageUp, 34-PageDown, 35-End, 36-Home, 48-57 is numbers 0-9, 65-90 is A-Z,
 	// 96-105 is numpad 0-9, 112-123 is F1-F12, 127-Del
 	public void keyPressed() {
-		if (phase == BEGINNING && selected != -1) {
-			if (keyCode == 32) {
-				phase = PLAYING;
-				player = new Player(selected);
-				player.setImageIcons(this);
-				
-			} else if (keyCode == 8) {
-				selected = -1;
+		if (phase == BEGINNING) {
+			if (keyCode == 73) { // I
+				displayInstructions();
 			}
-		} else if (phase == PLAYING) {
+			if (keyCode == 88) { // X
+				displayAbout();
+			}
+			if (selected != -1) {
+				if (keyCode == 32) {
+					phase = PLAYING;
+					player = new Player(selected);
+					player.setImageIcons(this);
+					
+				} else if (keyCode == 8) {
+					selected = -1;
+				}
+			}
+		}
+		else if (phase == PLAYING) {
 			init = false;
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
 				keyCode = this.UP;
