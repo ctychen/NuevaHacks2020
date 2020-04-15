@@ -20,6 +20,8 @@ public class DrawingSurface extends PApplet {
 	
 	public Map map;
 	
+	private boolean init = true;
+	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
 												// keycode is true, when it is released it gets set to false
 	public static final int BEGINNING = 0;
@@ -107,7 +109,9 @@ public class DrawingSurface extends PApplet {
 			drawSelection();
 		else if (phase == PLAYING) {
 			map.draw(this, 0, 0);
-			player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+			if (init) {
+				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+			}
 			player.draw(this);
 		}
 		redraw();
@@ -180,13 +184,14 @@ public class DrawingSurface extends PApplet {
 				selected = -1;
 			}
 		} else if (phase == PLAYING) {
+			init = false;
 			if (keyCode == 38) { // up arrow
 	
 				player.moveUpIcon(this, movingUpCounter);
 	    		
 				movingUpCounter++;
 				
-				if(movingUpCounter == 20) {
+				if(movingUpCounter == 16) {
 					movingUpCounter = 0;
 					movingUp = false;
 				}
@@ -197,7 +202,7 @@ public class DrawingSurface extends PApplet {
     		
 				movingLeftCounter++;
 				
-				if(movingLeftCounter == 20) {
+				if(movingLeftCounter == 16) {
 					movingLeftCounter = 0;
 					movingLeft = false;
 				}
@@ -208,7 +213,7 @@ public class DrawingSurface extends PApplet {
 	    		
 				movingDownCounter++;
 				
-				if(movingDownCounter == 20) {
+				if(movingDownCounter == 16) {
 					movingDownCounter = 0;
 					movingDown = false;
 				}
@@ -219,7 +224,7 @@ public class DrawingSurface extends PApplet {
 	    		
 				movingRightCounter++;
 				
-				if(movingRightCounter == 20) {
+				if(movingRightCounter == 16) {
 					movingRightCounter = 0;
 					movingRight = false;
 				}

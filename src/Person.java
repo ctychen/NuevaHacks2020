@@ -14,10 +14,14 @@ public abstract class Person {
 	protected int xi;
 	protected int yi;
 	protected int walkingAnimationPart = 1;
-	protected PImage[] frontIcons;
-	protected PImage[] leftIcons;
-	protected PImage[] rightIcons;
-	protected PImage[] backIcons;
+	protected PImage frontStill;
+	protected PImage leftStill;
+	protected PImage rightStill;
+	protected PImage backStill;
+	protected PImage[] frontStepIcons;
+	protected PImage[] leftStepIcons;
+	protected PImage[] rightStepIcons;
+	protected PImage[] backStepIcons;
 	protected PImage currentIcon;
 	protected int personID;
 	protected DrawingSurface.Direction currentMovingDirection;
@@ -79,17 +83,22 @@ public abstract class Person {
 	}
 
 	public void setImageIcons(PApplet p) {
-		frontIcons = new PImage[] { 
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png"),
+		
+		frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
+		leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
+		rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
+		backStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png");
+		
+		frontStepIcons = new PImage[] { 
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
 			};
-		leftIcons = new PImage[] {
+		leftStepIcons = new PImage[] {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
 		};
-		rightIcons = new PImage[] {
+		rightStepIcons = new PImage[] {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
@@ -100,7 +109,8 @@ public abstract class Person {
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 //		};
 		// default icon is front-still
-		this.currentIcon = frontIcons[0]; 
+		this.currentIcon = frontStill; 
+		p.frameRate(5);
 	}
 	
 	public void draw(PApplet p) {
@@ -121,8 +131,9 @@ public abstract class Person {
 		}
 	}
 
+	// moving down by default but setting position
 	public void setPosition(int x, int y) {
-		setPosition(x, y, DrawingSurface.Direction.UP);
+		setPosition(x, y, DrawingSurface.Direction.DOWN);
 	}
 	
 	public void setPosition(int x, int y, DrawingSurface.Direction dir) {
@@ -135,54 +146,71 @@ public abstract class Person {
 	
 	public void standStillIcon(PApplet p, int i) {
 		if (currentMovingDirection == DrawingSurface.Direction.UP) {
-			currentIcon = frontIcons[0];
+			currentIcon = backStill;
 		} else if (currentMovingDirection == DrawingSurface.Direction.LEFT) {
-			currentIcon = leftIcons[0];
+			currentIcon = leftStill;
 		} else if (currentMovingDirection == DrawingSurface.Direction.RIGHT) {
-			currentIcon = rightIcons[0];
+			currentIcon = rightStill;
 		} else if (currentMovingDirection == DrawingSurface.Direction.DOWN) {
-			currentIcon = backIcons[0];
+			currentIcon = frontStill;
 		}
 	}
 
 	public void moveUpIcon(PApplet p, int i) {
-		y+=2*normalSpeed;
-		if (i % 20 == 0) {
-			currentIcon = frontIcons[1];
-		} else if (i % 10 == 0) {
-			currentIcon = frontIcons[2];
-		}
-		p.redraw();
+//		y-=normalSpeed;
+//		if (i % 20 == 0) {
+//			currentIcon = backIcons[1];
+//		} else if (i % 10 == 0) {
+//			currentIcon = backIcons[2];
+//		}
+		
+		p.image(backStepIcons[i%backStepIcons.length], x, y);
+		y-=normalSpeed;
+
 	}
 
 	public void moveLeftIcon(PApplet p, int i) {
-		x-=2*normalSpeed;
-		if (i % 20 == 0) {
-			currentIcon = leftIcons[1];
-		} else if (i % 10 == 0) {
-			currentIcon = leftIcons[2];
-		}
-		p.redraw();
+//		x-=normalSpeed;
+//		if (i % 20 == 0) {
+//			currentIcon = leftStepIcons[1];
+//		} else if (i % 10 == 0) {
+//			currentIcon = leftStepIcons[2];
+//		}
+//		p.redraw();
+
+		p.image(leftStepIcons[i%leftStepIcons.length], x, y);
+		x-=normalSpeed;
+		
 	}
 
 	public void moveRightIcon(PApplet p, int i) {
-		x+=2*normalSpeed;
-		if (i % 20 == 0) {
-			currentIcon = rightIcons[1];
-		} else if (i % 10 == 0) {
-			currentIcon = rightIcons[2];
-		}
-		p.redraw();
+//		x+=normalSpeed;
+//		if (i % 20 == 0) {
+//			currentIcon = rightStepIcons[1];
+//		} else if (i % 10 == 0) {
+//			currentIcon = rightStepIcons[2];
+//		}
+//		p.redraw();
+
+
+		p.image(rightStepIcons[i%rightStepIcons.length], x, y);
+		x+=normalSpeed;
+		
 	}
 
 	public void moveDownIcon(PApplet p, int i) {
-		y-=2*normalSpeed;
-		if (i % 20 == 0) {
-			currentIcon = backIcons[1];
-		} else if (i % 10 == 0) {
-			currentIcon = backIcons[2];
-		}
-		p.redraw();
+//		y+=normalSpeed;
+//		if (i % 20 == 0) {
+//			currentIcon = frontStepIcons[1];
+//		} else if (i % 10 == 0) {
+//			currentIcon = frontStepIcons[2];
+//		}
+//		p.redraw();
+
+
+		p.image(frontStepIcons[i%frontStepIcons.length], x, y);
+		y+=normalSpeed;
+		
 	}
 
 }
