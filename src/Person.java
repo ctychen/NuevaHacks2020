@@ -18,7 +18,7 @@ public abstract class Person {
 	protected PImage[] rightIcons;
 	protected PImage[] backIcons;
 	protected PImage currentIcon;
-	protected int id;
+	protected int personID;
 	protected DrawingSurface.Direction currentMovingDirection;
 	protected int normalSpeed;
 	protected int maxSpeed;
@@ -31,7 +31,8 @@ public abstract class Person {
 	public Person(int id) {
 		// all the image filenames are like p1front or p3left, so ID for choosing the
 		// image
-		switch(id) {
+		this.personID = id + 1;
+		switch(personID) {
 		case 1: // blue haired person
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
@@ -52,11 +53,16 @@ public abstract class Person {
 			maxSpeed = 7;
 			initRisk = 10;
 			// ... //
-		case 5: // boomer 1
+		case 5: // boomer, gray hair
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
 			initRisk = 10;
 			// ... //
+		case 6: // red haired hat weirdo
+			normalSpeed = 5; // whatever these should be
+			maxSpeed = 7;
+			initRisk = 10;
+			
 		// ... etc
 		}
 		currentMovingDirection = DrawingSurface.Direction.UP;
@@ -73,25 +79,27 @@ public abstract class Person {
 
 	public void setImageIcons(PApplet p) {
 		frontIcons = new PImage[] { 
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "front.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "frontstep2.png") 
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
 			};
 		leftIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "left.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "leftstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "leftstep2.png")
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
 		};
 		rightIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "right.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "rightstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "rightstep2.png")
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
 		};
-		backIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "back.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep2.png")
-		};
+//		backIcons = new PImage[] {
+//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png"),
+//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
+//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
+//		};
+		// default icon is front-still
+		this.currentIcon = frontIcons[0]; 
 	}
 	
 	public void draw(PApplet p) {
