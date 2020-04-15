@@ -94,23 +94,20 @@ public abstract class Person {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
 			};
 		leftStepIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
 		};
 		rightStepIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
 		};
 //		backIcons = new PImage[] {
-//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png"),
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 //		};
 		// default icon is front-still
 		this.currentIcon = frontStill; 
-		p.frameRate(5);
+		p.frameRate(3);
 	}
 	
 	public void draw(PApplet p) {
@@ -157,12 +154,6 @@ public abstract class Person {
 	}
 
 	public void moveUpIcon(PApplet p, int i) {
-//		y-=normalSpeed;
-//		if (i % 20 == 0) {
-//			currentIcon = backIcons[1];
-//		} else if (i % 10 == 0) {
-//			currentIcon = backIcons[2];
-//		}
 		
 		currentMovingDirection = DrawingSurface.Direction.UP;
 		currentIcon = backStepIcons[i%backStepIcons.length];
@@ -170,14 +161,7 @@ public abstract class Person {
 
 	}
 
-	public void moveLeftIcon(PApplet p, int i) {
-//		x-=normalSpeed;
-//		if (i % 20 == 0) {
-//			currentIcon = leftStepIcons[1];
-//		} else if (i % 10 == 0) {
-//			currentIcon = leftStepIcons[2];
-//		}
-//		p.redraw();
+	public void moveLeftIcon(PApplet p, int i) {;
 
 		currentMovingDirection = DrawingSurface.Direction.LEFT;
 		currentIcon = leftStepIcons[i%leftStepIcons.length];
@@ -186,13 +170,6 @@ public abstract class Person {
 	}
 
 	public void moveRightIcon(PApplet p, int i) {
-//		x+=normalSpeed;
-//		if (i % 20 == 0) {
-//			currentIcon = rightStepIcons[1];
-//		} else if (i % 10 == 0) {
-//			currentIcon = rightStepIcons[2];
-//		}
-//		p.redraw();
 
 		currentMovingDirection = DrawingSurface.Direction.RIGHT;
 		currentIcon = rightStepIcons[i%rightStepIcons.length];
@@ -201,13 +178,6 @@ public abstract class Person {
 	}
 
 	public void moveDownIcon(PApplet p, int i) {
-//		y+=normalSpeed;
-//		if (i % 20 == 0) {
-//			currentIcon = frontStepIcons[1];
-//		} else if (i % 10 == 0) {
-//			currentIcon = frontStepIcons[2];
-//		}
-//		p.redraw();
 
 		currentMovingDirection = DrawingSurface.Direction.DOWN;
 		currentIcon = frontStepIcons[i%frontStepIcons.length];
