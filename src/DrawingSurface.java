@@ -2,9 +2,11 @@ import processing.event.KeyEvent;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.time.*;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -28,6 +30,7 @@ public class DrawingSurface extends PApplet {
 	public static final int PLAYING = 1;
 	
 	public Player player;
+	public static ArrayList<Person> npc = new ArrayList<Person>();
 	
 	public static int phase = BEGINNING;
 	
@@ -128,10 +131,22 @@ public class DrawingSurface extends PApplet {
 				ty = -((map.maxY()-1)*width*0.05f-height);
 			
 			translate(tx, ty);
-			map.draw(this, tx, ty);
+			map.draw(this, tx, ty, init);
 			
 			if (init) {
 				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+//				
+				for (int i = 0; i < map.getNPCStartingLocs().size(); i++) {
+					Person m_npc = new Person(1 + (int)(Math.random() * 5));
+					Point2D.Float m_npcStart = map.getNPCStartingLocs().get(i);
+					m_npc.setPosition((int)(m_npcStart.getX()), (int)(m_npcStart.getY()));
+					m_npc.setImageIcons(this);
+					npc.add(m_npc);
+					}
+			}
+			
+			for (Person p : npc) {
+				p.draw(this);
 			}
 			player.draw(this, keys);
 			translate(-tx, -ty);
@@ -205,54 +220,8 @@ public class DrawingSurface extends PApplet {
 			} else if (keyCode == 8) {
 				selected = -1;
 			}
-		} else if (phase == PLAYING) {         // !!! BBBOI You cant handle movement in here like this, different computers handle key repeats differently
+		} else if (phase == PLAYING) {
 			init = false;
-			/*
-			if (keyCode == 38) { // up arrow
-	
-				player.moveUpIcon(this, movingUpCounter);
-	    		
-				movingUpCounter++;
-				
-				if(movingUpCounter == 16) { //Have you heard of the % operator?
-					movingUpCounter = 0;
-					movingUp = false;
-				}
-				
-			} else if (keyCode == 37) { // left arrow
-				
-				player.moveLeftIcon(this, movingLeftCounter);
-    		
-				movingLeftCounter++;
-				
-				if(movingLeftCounter == 16) {
-					movingLeftCounter = 0;
-					movingLeft = false;
-				}
-				
-			} else if (keyCode == 40) { // down arrow
-				
-				player.moveDownIcon(this, movingDownCounter);
-	    		
-				movingDownCounter++;
-				
-				if(movingDownCounter == 16) {
-					movingDownCounter = 0;
-					movingDown = false;
-				}
-	
-			} else if (keyCode == 39) { // right arrow
-	
-				player.moveRightIcon(this, movingRightCounter);
-	    		
-				movingRightCounter++;
-				
-				if(movingRightCounter == 16) {
-					movingRightCounter = 0;
-					movingRight = false;
-				}
-			}*/
-	
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
 				keyCode = this.UP;
 			else if (keyCode == 65)

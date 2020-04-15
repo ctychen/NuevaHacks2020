@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public abstract class Person {
+public class Person {
 
 	protected boolean isInfected;
 	protected double risk;
@@ -87,8 +87,6 @@ public abstract class Person {
 		frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
 		leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
 		rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
-		backStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png");
-		
 		frontStepIcons = new PImage[] { 
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
@@ -112,6 +110,7 @@ public abstract class Person {
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
+		System.out.println("Trying to draw");
 		//System.out.println("Drawing at " + x + ", " + y);
 		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
@@ -183,6 +182,32 @@ public abstract class Person {
 		currentIcon = frontStepIcons[i%frontStepIcons.length];
 		y+=p.width*0.001*normalSpeed;
 		
+	}
+	
+	public void draw(PApplet g, boolean[] keys) {
+		if (keys[g.UP]) {
+		}
+		if (keys[g.DOWN]) {
+		}
+		if (keys[g.LEFT]) {
+		}
+		if (keys[g.RIGHT]) {
+		}
+		else if (!keys[g.LEFT] && !keys[g.DOWN] && !keys[g.UP]) {
+			standStillIcon(g);
+		}
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public PImage getCurrentIcon() {
+		return this.currentIcon;
 	}
 
 }
