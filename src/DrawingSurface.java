@@ -128,7 +128,7 @@ public class DrawingSurface extends PApplet {
 			else if(player.y > (map.maxY()-1)*width*0.05f-height*0.5f)
 				ty = -((map.maxY()-1)*width*0.05f-height);
 			
-			translate(tx, ty);
+			//translate(tx, ty);
 			map.draw(this, tx, ty, init);
 			
 			if (init) {
@@ -138,11 +138,11 @@ public class DrawingSurface extends PApplet {
 			for (Person p : npc) {
 				p.move(player.getX(), player.getY());
 				p.setImageIcons(this);
-				p.draw(this);
+				p.draw(this, tx, ty);
 			}
 			riskBar.draw(this);
-			player.draw(this, keys);
-			translate(-tx, -ty);
+			player.draw(this, keys, tx, ty);
+			//translate(-tx, -ty);
 		}
 		redraw();
 	}

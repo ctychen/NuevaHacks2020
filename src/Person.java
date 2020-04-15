@@ -119,9 +119,12 @@ public class Person {
 		if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 	}
 	
-	public void draw(PApplet p) {
+	public void draw(PApplet p, float tx, float ty) {
 		p.pushStyle();
-		p.image(currentIcon, x, y);
+		if (currentIcon != null)
+			p.image(currentIcon, x+tx, y+ty);
+		else
+			p.rect(x-tx, y-ty, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
 	
