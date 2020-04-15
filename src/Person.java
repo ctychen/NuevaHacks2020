@@ -22,6 +22,7 @@ public abstract class Person {
 	protected DrawingSurface.Direction currentMovingDirection;
 	protected int normalSpeed;
 	protected int maxSpeed;
+	protected Pet pet;
 
 	public Person() {
 
@@ -67,7 +68,7 @@ public abstract class Person {
 	}
 
 	public void addPet(Pet.Type type) {
-
+		pet = new Pet(type);
 	}
 
 	public void setImageIcons(PApplet p) {
