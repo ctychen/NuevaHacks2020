@@ -104,7 +104,7 @@ public class Person {
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 //		};
 		// default icon is front-still
-		this.currentIcon = frontStill; 
+		this.currentIcon = frontStill;
 	}
 	
 	public void draw(PApplet p) {
