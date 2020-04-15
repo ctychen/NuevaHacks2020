@@ -30,8 +30,8 @@ public class Player extends Person{
 		playerIcon[11] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "backstep2.png");
 	}*/
 	
-	public void draw(PApplet g, boolean[] keys) {
-		super.draw(g);
+	public void draw(PApplet g, boolean[] keys, float tx, float ty) {
+		super.draw(g, tx, ty);
 		
 		if (keys[g.UP]) {
 			//y-=g.width*0.001*normalSpeed;

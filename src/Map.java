@@ -74,49 +74,49 @@ public class Map {
 				switch ((char) map.get(m).get(i).charAt(j)) {
 
 					case '-': // Grass
-						g.image(tiles[0], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[0], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '=': // Path
-						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '5':
-						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '7':
-						g.image(tiles[4], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[4], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '8':
-						g.image(tiles[9], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[9], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '9':
-						g.image(tiles[2], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[2], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '4':
-						g.image(tiles[7], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[7], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '6':
-						g.image(tiles[8], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[8], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '1':
-						g.image(tiles[12], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[12], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '2':
-						g.image(tiles[1], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[1], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '3':
-						g.image(tiles[10], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[10], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '#':
-						g.image(tiles[11], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[11], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '!':
-						g.image(tiles[13], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[13], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '&':
-						g.image(tiles[5], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[5], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '(':
-						g.image(tiles[3], g.width*0.05f*j, g.width*0.05f*(i-1));
+						g.image(tiles[3], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
 						break;
 					case '*': 
 						// NPC starts here
@@ -159,7 +159,7 @@ public class Map {
 			g.image(bigBoiImage, 0, 0);*/
 		g.pushMatrix();
 		g.pushStyle();
-		g.translate(-tx, -ty);
+		//g.translate(-tx, -ty);
 		g.textAlign(PConstants.LEFT);
 		g.fill(255);
 		g.text(map.get(m).get(0).substring(map.get(m).get(0).indexOf('\"') + 1,
