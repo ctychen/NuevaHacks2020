@@ -144,7 +144,7 @@ public abstract class Person {
 		this.currentMovingDirection = dir;
 	}
 	
-	public void standStillIcon(PApplet p, int i) {
+	public void standStillIcon(PApplet p) {
 		if (currentMovingDirection == DrawingSurface.Direction.UP) {
 			currentIcon = backStill;
 		} else if (currentMovingDirection == DrawingSurface.Direction.LEFT) {
@@ -164,8 +164,9 @@ public abstract class Person {
 //			currentIcon = backIcons[2];
 //		}
 		
-		p.image(backStepIcons[i%backStepIcons.length], x, y);
-		y-=normalSpeed;
+		currentMovingDirection = DrawingSurface.Direction.UP;
+		currentIcon = backStepIcons[i%backStepIcons.length];
+		y-=p.width*0.001*normalSpeed;
 
 	}
 
@@ -178,8 +179,9 @@ public abstract class Person {
 //		}
 //		p.redraw();
 
-		p.image(leftStepIcons[i%leftStepIcons.length], x, y);
-		x-=normalSpeed;
+		currentMovingDirection = DrawingSurface.Direction.LEFT;
+		currentIcon = leftStepIcons[i%leftStepIcons.length];
+		x-=p.width*0.001*normalSpeed;
 		
 	}
 
@@ -192,9 +194,9 @@ public abstract class Person {
 //		}
 //		p.redraw();
 
-
-		p.image(rightStepIcons[i%rightStepIcons.length], x, y);
-		x+=normalSpeed;
+		currentMovingDirection = DrawingSurface.Direction.RIGHT;
+		currentIcon = rightStepIcons[i%rightStepIcons.length];
+		x+=p.width*0.001*normalSpeed;
 		
 	}
 
@@ -207,9 +209,9 @@ public abstract class Person {
 //		}
 //		p.redraw();
 
-
-		p.image(frontStepIcons[i%frontStepIcons.length], x, y);
-		y+=normalSpeed;
+		currentMovingDirection = DrawingSurface.Direction.DOWN;
+		currentIcon = frontStepIcons[i%frontStepIcons.length];
+		y+=p.width*0.001*normalSpeed;
 		
 	}
 

@@ -36,15 +36,15 @@ public class DrawingSurface extends PApplet {
 	
 	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
-	private int movingUpCounter = 0;
-	private int movingLeftCounter = 0;
-	private int movingRightCounter = 0;
-	private int movingDownCounter = 0;
-	
-	private boolean movingUp = false;
-	private boolean movingLeft = false;
-	private boolean movingDown = false;
-	private boolean movingRight = false;
+//	private int movingUpCounter = 0;
+//	private int movingLeftCounter = 0;
+//	private int movingRightCounter = 0;
+//	private int movingDownCounter = 0;
+//	
+//	private boolean movingUp = false;
+//	private boolean movingLeft = false;
+//	private boolean movingDown = false;
+//	private boolean movingRight = false;
 	
 	float tx = 0, ty = 0;
 	
@@ -205,7 +205,7 @@ public class DrawingSurface extends PApplet {
 			} else if (keyCode == 8) {
 				selected = -1;
 			}
-		} else if (phase == PLAYING) {
+		} else if (phase == PLAYING) {         // !!! BBBOI You cant handle movement in here like this, different computers handle key repeats differently
 			init = false;
 			/*
 			if (keyCode == 38) { // up arrow
@@ -214,7 +214,7 @@ public class DrawingSurface extends PApplet {
 	    		
 				movingUpCounter++;
 				
-				if(movingUpCounter == 16) {
+				if(movingUpCounter == 16) { //Have you heard of the % operator?
 					movingUpCounter = 0;
 					movingUp = false;
 				}
