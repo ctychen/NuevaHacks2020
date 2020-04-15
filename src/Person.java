@@ -102,19 +102,16 @@ public class Person {
 		leftStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
 		rightStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
 //		backStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		for (PImage e : frontStepIcons) {
-			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		}
-		for (PImage e : leftStepIcons) {
-			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		}
-		for (PImage e : rightStepIcons) {
-			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		}
-		this.currentIcon = frontStill;
-//		for (PImage e : backStepIcons) {
-//			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-//		}
+		System.out.print("loaded images");
+		if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStill != null) leftStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStill != null) rightStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 	}
 	
 	public void draw(PApplet p) {
