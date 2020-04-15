@@ -7,8 +7,8 @@ import processing.core.PImage;
 public class Person {
 
 	protected boolean isInfected;
-	protected double risk;
-	protected double initRisk; // max risk should be 100 or something 
+	protected int risk;
+	protected int initRisk; // max risk should be 100 or something 
 	protected int x;
 	protected int y;
 	protected int xi;
@@ -25,8 +25,8 @@ public class Person {
 	protected PImage currentIcon;
 	protected int personID;
 	protected DrawingSurface.Direction currentMovingDirection;
-	protected int normalSpeed;
-	protected int maxSpeed;
+	protected int speed, maxSpeed;
+	protected int vx, vy;
 	protected Pet pet;
 
 	public Person() {
@@ -39,41 +39,34 @@ public class Person {
 		this.personID = id + 1;
 		switch(personID) {
 		case 1: // blue haired person
-			normalSpeed = 7; // whatever these should be
-			maxSpeed = 10;
+			speed = 7;
 			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 2: // blue hat guy
-			normalSpeed = 10; // whatever these should be
-			maxSpeed = 15;
+			speed = 10; 
 			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 3: // green fancy guy
-			normalSpeed = 9; // whatever these should be
-			maxSpeed = 12;
+			speed = 9;
 			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 4: // red hat guy
-			normalSpeed = 10; // whatever these should be
-			maxSpeed = 15;
+			speed = 10; 
 			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 5: // boomer, gray hair
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
+			speed = 5; 
 			initRisk = 15 + (int)(Math.random() * 10);
 			// ... //
 		case 6: // red haired hat weirdo
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
+			speed = 5; 
 			initRisk = 10 + (int)(Math.random() * 10);
 			
 		// ... etc
 		}
 		currentMovingDirection = DrawingSurface.Direction.UP;
-		// TODO set init pos
-		
-		
+		maxSpeed = speed;
+		risk = initRisk;
 		this.x = xi;
 		this.y = yi;
 	}
@@ -152,7 +145,7 @@ public class Person {
 		
 		currentMovingDirection = DrawingSurface.Direction.UP;
 		currentIcon = backStepIcons[i%backStepIcons.length];
-		y-=p.width*0.001*normalSpeed;
+		y-=p.width*0.001*speed;
 
 	}
 
@@ -160,7 +153,7 @@ public class Person {
 
 		currentMovingDirection = DrawingSurface.Direction.LEFT;
 		currentIcon = leftStepIcons[i%leftStepIcons.length];
-		x-=p.width*0.001*normalSpeed;
+		x-=p.width*0.001*speed;
 		
 	}
 
@@ -168,7 +161,7 @@ public class Person {
 
 		currentMovingDirection = DrawingSurface.Direction.RIGHT;
 		currentIcon = rightStepIcons[i%rightStepIcons.length];
-		x+=p.width*0.001*normalSpeed;
+		x+=p.width*0.001*speed;
 		
 	}
 
@@ -176,7 +169,7 @@ public class Person {
 
 		currentMovingDirection = DrawingSurface.Direction.DOWN;
 		currentIcon = frontStepIcons[i%frontStepIcons.length];
-		y+=p.width*0.001*normalSpeed;
+		y+=p.width*0.001*speed;
 		
 	}
 	
@@ -194,12 +187,33 @@ public class Person {
 		}
 	}
 	
+	public void move(int px, int py) {
+		px = (int)(Math.random()*200-100);
+		py = (int)(Math.random()*200-100);
+		float temp = (float)Math.sqrt( (px)*(px) + (py)*(py) );
+		if (Math.random() < 0.5) {
+			vx = (int)(speed*(px)/temp);
+		} else {
+			vy = (int)(speed*(py)/temp);
+		}
+		x+=vx;
+		y+=vy;	
+	}
+	
 	public int getX() {
 		return this.x;
 	}
 	
 	public int getY() {
 		return this.y;
+	}
+	
+	public int getRisk() {
+		return this.risk;
+	}
+	
+	public void changeRisk(int amount) {
+		this.risk += amount;
 	}
 	
 	public PImage getCurrentIcon() {

@@ -22,6 +22,8 @@ public class DrawingSurface extends PApplet {
 	
 	public Map map;
 	
+	public RiskBar riskBar;
+	
 	private boolean init = true;
 	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
@@ -114,8 +116,6 @@ public class DrawingSurface extends PApplet {
 			drawSelection();
 		else if (phase == PLAYING) {
 			clear();
-			
-			
 			if(player.x >= width*0.5f && player.x <= map.maxX()*width*0.05f-width*0.5f)
 				tx= -player.x+width*0.5f;
 			else if(player.x < width*0.5f)
@@ -134,20 +134,23 @@ public class DrawingSurface extends PApplet {
 			map.draw(this, tx, ty, init);
 			
 			if (init) {
+				riskBar = new RiskBar(player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
 				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 //				
 				for (int i = 0; i < map.getNPCStartingLocs().size(); i++) {
 					Person m_npc = new Person(1 + (int)(Math.random() * 5));
 					Point2D.Float m_npcStart = map.getNPCStartingLocs().get(i);
 					m_npc.setPosition((int)(m_npcStart.getX()), (int)(m_npcStart.getY()));
-					m_npc.setImageIcons(this);
 					npc.add(m_npc);
 					}
 			}
 			
 			for (Person p : npc) {
+				p.move(player.getX(), player.getY());
+				p.setImageIcons(this);
 				p.draw(this);
 			}
+			riskBar.draw(this);
 			player.draw(this, keys);
 			translate(-tx, -ty);
 		}
