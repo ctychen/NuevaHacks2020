@@ -121,7 +121,10 @@ public class Person {
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
-		p.image(currentIcon, x, y);
+		if (currentIcon != null)
+			p.image(currentIcon, x, y);
+		else
+			p.rect(x, y, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
 	
