@@ -39,6 +39,9 @@ public class Map {
 				g.loadImage("terrain" + FileIO.fileSep + "pathtopright2.png"),   //12
 				g.loadImage("terrain" + FileIO.fileSep + "pathtopright1.png"),   //13
 				};
+		for (PImage e : tiles) {
+			e.resize((int)(g.width*0.05f), (int)(g.width*0.05f));
+		}
 	}
 	protected Point2D.Float playerStart = null;
 	
@@ -62,57 +65,57 @@ public class Map {
 	public void draw(PApplet g, float tx, float ty, boolean init) {
 
 		g.pushStyle();
-		if (drawn == false) {
-			drawn = true;
+		/*if (drawn == false) {
+			drawn = true;*/
 		for (int i = 1; i < map.get(m).size(); i++) {
 			for (int j = 0; j < map.get(m).get(i).length(); j++) {
 				g.stroke(0);
 				switch ((char) map.get(m).get(i).charAt(j)) {
 
 					case '-': // Grass
-						g.image(tiles[0], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[0], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '=': // Path
-						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '5':
-						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[6], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '7':
-						g.image(tiles[4], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[4], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '8':
-						g.image(tiles[9], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[9], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '9':
-						g.image(tiles[2], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[2], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '4':
-						g.image(tiles[7], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[7], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '6':
-						g.image(tiles[8], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[8], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '1':
-						g.image(tiles[12], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[12], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '2':
-						g.image(tiles[1], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[1], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '3':
-						g.image(tiles[10], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[10], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '#':
-						g.image(tiles[11], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[11], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '!':
-						g.image(tiles[13], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[13], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '&':
-						g.image(tiles[5], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[5], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '(':
-						g.image(tiles[3], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
+						g.image(tiles[3], g.width*0.05f*j, g.width*0.05f*(i-1));
 						break;
 					case '*': 
 						// NPC starts here
@@ -138,12 +141,13 @@ public class Map {
 						break;
 				}	
 			}
-			
 		}
+			/*
 		g.saveFrame("cache" + FileIO.fileSep + "map.png");
 		bigBoiImage = g.loadImage("cache" + FileIO.fileSep + "map.png");
+		System.out.println("bigboi");
 		} else
-			g.image(bigBoiImage, 0, 0);
+			g.image(bigBoiImage, 0, 0);*/
 		g.pushMatrix();
 		g.pushStyle();
 		g.translate(-tx, -ty);
