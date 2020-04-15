@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,8 +25,17 @@ public class Player extends Person{
 		playerIcon[11] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "backstep2.png");
 	}*/
 	
-	public void draw(PApplet p) {
-		super.draw(p);
+	public void draw(PApplet g, boolean[] keys) {
+		super.draw(g);
+		
+		if (keys[g.UP])
+			y-=g.width*0.001*normalSpeed;
+		if (keys[g.DOWN])
+			y+=g.width*0.001*normalSpeed;
+		if (keys[g.LEFT])
+			x-=g.width*0.001*normalSpeed;
+		if (keys[g.RIGHT])
+			x+=g.width*0.001*normalSpeed;
 	}
 	
 }

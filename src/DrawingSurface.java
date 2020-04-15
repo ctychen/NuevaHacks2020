@@ -46,6 +46,8 @@ public class DrawingSurface extends PApplet {
 	private boolean movingDown = false;
 	private boolean movingRight = false;
 	
+	float tx = 0, ty = 0;
+	
 	Clock fancyClock = Clock.systemDefaultZone();
 	
 	short selected = -1;
@@ -108,13 +110,33 @@ public class DrawingSurface extends PApplet {
 		if (phase == BEGINNING)
 			drawSelection();
 		else if (phase == PLAYING) {
-			map.draw(this, 0, 0);
+			clear();
+			
+			
+			if(player.x >= width*0.5f && player.x <= map.maxX()*width*0.05f-width*0.5f)
+				tx= -player.x+width*0.5f;
+			else if(player.x < width*0.5f)
+				tx = 0;
+			else if (player.x > map.maxX()*width*0.05f-width*0.5f)
+				tx = -(map.maxX()*width*0.05f-width);
+			
+			if(player.y >= height*0.5f && player.y <= (map.maxY()-1)*width*0.05f-height*0.5f)
+				ty= -player.y+height*0.5f;
+			else if(player.y < height*0.5f)//ahem osman
+				ty = 0;
+			else if(player.y > (map.maxY()-1)*width*0.05f-height*0.5f)
+				ty = -((map.maxY()-1)*width*0.05f-height);
+			
+			translate(tx, ty);
+			map.draw(this, tx, ty);
+			
 			if (init) {
 				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 			}
-			player.draw(this);
+			player.draw(this, keys);
+			translate(-tx, -ty);
 		}
-		redraw();
+		//redraw();
 	}
 	
 	public void drawSelection() {
@@ -185,6 +207,7 @@ public class DrawingSurface extends PApplet {
 			}
 		} else if (phase == PLAYING) {
 			init = false;
+			/*
 			if (keyCode == 38) { // up arrow
 	
 				player.moveUpIcon(this, movingUpCounter);
@@ -228,7 +251,7 @@ public class DrawingSurface extends PApplet {
 					movingRightCounter = 0;
 					movingRight = false;
 				}
-			}
+			}*/
 	
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow
 								// keys or WASD
