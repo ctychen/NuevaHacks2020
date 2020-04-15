@@ -40,7 +40,7 @@ public class Map {
 				g.loadImage("terrain" + FileIO.fileSep + "pathtopright1.png"),   //13
 				};
 		for (PImage e : tiles) {
-			e.resize((int)(g.width*0.05f), (int)(g.width*0.05f));
+			e.resize((int)(g.width*0.05f+0.5f), (int)(g.width*0.05f+0.5f));
 		}
 	}
 	protected Point2D.Float playerStart = null;
