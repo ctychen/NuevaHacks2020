@@ -22,12 +22,12 @@ public class DrawingSurface extends PApplet {
 	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
 												// keycode is true, when it is released it gets set to false
-	public static final int BEGINING = 0;
+	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
 	
 	public Player player;
 	
-	public static int phase = BEGINING;
+	public static int phase = BEGINNING;
 	
 	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 6; //How many playable characters are there
 	private static final int CHARACTERS_PER_ROW = 5; //How many playable characters should be listed per row
@@ -93,7 +93,7 @@ public class DrawingSurface extends PApplet {
 	// sequence and after the last line is read, the first
 	// line is executed again.
 	public void draw() {
-		if (phase == BEGINING)
+		if (phase == BEGINNING)
 			drawSelection();
 		else if (phase == PLAYING) {
 			map.draw(this, 0, 0);
@@ -130,7 +130,7 @@ public class DrawingSurface extends PApplet {
 	}
 	
 	public void mousePressed() { //Yeet, I like them triangles
-		if (phase == BEGINING) {
+		if (phase == BEGINNING) {
 			if (mouseButton == LEFT) {
 				for (short i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++) {
 					if (mouseX > width*0.2f*i && mouseX < width*0.2f*i+width*0.2f && mouseY > height*0.25f && mouseY < height*0.25f+width*0.2f) { //Ok i have no idea how or why this works, but somehow it sorta works
@@ -157,12 +157,12 @@ public class DrawingSurface extends PApplet {
 	// 33-PageUp, 34-PageDown, 35-End, 36-Home, 48-57 is numbers 0-9, 65-90 is A-Z,
 	// 96-105 is numpad 0-9, 112-123 is F1-F12, 127-Del
 	public void keyPressed() {
-		if (phase == BEGINING && selected != -1) {
+		if (phase == BEGINNING && selected != -1) {
 			if (keyCode == 32) {
 				phase = PLAYING;
 				player = new Player(selected);
-				//player.setLoc((int)(width*0.2), (int)(height*0.2));
-				//player.spawn(map.getCurrentMap(), this);
+				player.setLoc((int)(width*0.2), (int)(height*0.2));
+				player.spawn(map.getCurrentMap(), this);
 			} else if (keyCode == 8) {
 				selected = -1;
 			}

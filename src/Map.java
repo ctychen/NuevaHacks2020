@@ -1,3 +1,4 @@
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,7 +15,8 @@ public class Map {
 	private ArrayList<Integer> maxY = new ArrayList<Integer>();
 
 	public int m; // Current map index
-
+	protected Point2D.Double playerStart = null;
+	
 	public void loadMap(int i) { // Loads a map, basically adding it to the appropriate arraylists
 		try {
 			map.add(FileIO.reeeeeeeeeeeeeeeeeead("maps" + FileIO.fileSep + "m" + i));
@@ -57,7 +59,9 @@ public class Map {
 					g.fill(200, 170, 130);
 					g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
 					break;
-				}
+				case 'x': // Player starts here
+					playerStart = new Point2D.Double(g.width * 0.05f * j + g.width * 0.025f, g.width * 0.05f * (i - 1) + g.width * 0.025f);
+				}	
 			}
 
 			g.pushMatrix();
@@ -95,5 +99,9 @@ public class Map {
 
 	public void setMap(int m) {
 		this.m = m;
+	}
+	
+	public Point2D.Double getPlayerStart() {
+		return this.playerStart;
 	}
 }

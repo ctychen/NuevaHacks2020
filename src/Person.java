@@ -93,6 +93,20 @@ public abstract class Person {
 				p.loadImage("people" + FileIO.fileSep + "p" + id + "backstep2.png")
 		};
 	}
+	
+	public void spawn(ArrayList<String> map, PApplet g) {
+		for (int i = 0; i < map.size(); i++) {
+			for (int j = 0; j < map.get(i).length(); j++) {
+				if (map.get(i).charAt(j) == 'x') {
+					x = (int)(g.width*0.05f*(j));
+					y = (int)(g.width*0.05f*(i-1.5f));
+					System.out.println("Placing at spawnpoint " + x + ", " + y);
+					xi = x;
+					yi = y;
+				}
+			}
+		}
+	}
 
 	public void standStillIcon(PApplet p, int i) {
 		if (currentMovingDirection == DrawingSurface.Direction.UP) {
