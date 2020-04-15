@@ -15,8 +15,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class DrawingSurface extends PApplet {
 
-	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair", "Another Hat Guy"};
-	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter", "Another yeeter with a hat"};
+	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair", "Another Hat Guy", "Is this Burroughs?", "Bosdolf Stalters?"}; //names needed
+	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter", "Another yeeter with a hat", "Fancy Math/Java teacher", "Combo of Stalin and Hitler, with a bit of Bob Ross"}; //descriptions needed
 	
 	
 	
@@ -29,7 +29,8 @@ public class DrawingSurface extends PApplet {
 	
 	public static int phase = BEGINING;
 	
-	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 4;
+	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 6; //How many playable characters are there
+	private static final int CHARACTERS_PER_ROW = 5; //How many playable characters should be listed per row
 	
 	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
@@ -103,9 +104,10 @@ public class DrawingSurface extends PApplet {
 		if (selected == -1) {
 			textAlign(LEFT);
 			textSize(width*0.02f);
-			text("Choose your character", width*0.01f, height*0.04f);
+			text("Choose your character", width*0.01f, width*0.02f);
 			for (int i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++)
-				image(picChar[2*i+zeroOrOne], width*0.2f*i, 1*height*0.25f, width*0.2f, width*0.25f);
+				image(picChar[2*i+zeroOrOne], width*0.2f*(i%CHARACTERS_PER_ROW), width*0.25f*(0.1f+(int)(i/CHARACTERS_PER_ROW)), width*0.2f, width*0.25f);
+				
 		} else {
 			textAlign(LEFT);
 			textSize(width*0.02f);
@@ -128,11 +130,11 @@ public class DrawingSurface extends PApplet {
 		if (phase == BEGINING) {
 			if (mouseButton == LEFT) {
 				for (short i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++) {
-					if (mouseX > width*0.2f*i && mouseX < width*0.2f*i+width*0.2f && mouseY > height*0.25f && mouseY < height*0.25f+width*0.2f) {
+					if (mouseX > width*0.2f*i && mouseX < width*0.2f*i+width*0.2f && mouseY > height*0.25f && mouseY < height*0.25f+width*0.2f) { //Ok i have no idea how or why this works, but somehow it sorta works
 						selected = i;
 						System.out.println("Selected " + i);
 						//phase = 1;
-					} else if (mouseX > width*0.2f*(i-5) && mouseX < width*0.2f*i+width*0.2f && mouseY > height*0.6f && mouseY < height*0.6f+width*0.2f) {
+					} else if (mouseX > width*0.2f*(i-5) && mouseX < width*0.2f*i+width*0.2f && mouseY > height*0.6f && mouseY < height*0.6f+width*0.2f) { //Ok i have no idea how or why this works, but somehow it sorta works
 						selected = i;
 						System.out.println("Selected " + i);
 						//phase = 1;
