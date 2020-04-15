@@ -99,11 +99,20 @@ public class Person {
 		// default icon is front-still
 		this.currentIcon = frontStill;
 		System.out.print("loaded images");
+		if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStill != null) leftStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStill != null) rightStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 	}
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
-		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
+		p.image(currentIcon, x, y);
 		p.popStyle();
 	}
 	
