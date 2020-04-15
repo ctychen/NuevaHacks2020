@@ -93,25 +93,29 @@ public class Person {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
 		};
-//		backStepIcons = new PImage[] {
-//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
-//				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
-//		};
+		backStepIcons = new PImage[] {
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
+				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
+		};
 		// default icon is front-still
-		frontStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		leftStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-		rightStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
-//		backStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
 		System.out.print("loaded images");
+		
 		if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (leftStill != null) leftStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (rightStill != null) rightStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (backStill != null) backStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		
 		if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		
 		if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		
 		if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		
+		if (backStepIcons[0] != null) backStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+		if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 	}
 	
 	public void draw(PApplet p) {
