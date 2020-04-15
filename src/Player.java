@@ -5,6 +5,7 @@ public class Player extends Person{
 	
 	public Player(int id) {
 		//Yeet
+		super(id);
 	}
 	
 	/*public void loadImages(PApplet g) {
@@ -22,8 +23,8 @@ public class Player extends Person{
 		playerIcon[11] = g.loadImage("players" + FileIO.fileSep + "p" + (id+1) + "backstep2.png");
 	}*/
 	
-	public void draw(PApplet g) {
-		
+	public void draw(PApplet p) {
+		super.draw(p);
 	}
 	
 }

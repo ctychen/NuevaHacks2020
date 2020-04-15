@@ -1,3 +1,4 @@
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class Map {
 				g.loadImage("terrain" + FileIO.fileSep + "pathtopright1.png"),   //13
 				};
 	}
+	protected Point2D.Float playerStart = null;
 	
 	public void loadMap(int i) { // Loads a map, basically adding it to the appropriate arraylists
 		try {
@@ -70,6 +72,7 @@ public class Map {
 			for (int j = 0; j < map.get(m).get(i).length(); j++) {
 				g.stroke(0);
 				switch ((char) map.get(m).get(i).charAt(j)) {
+
 					case '-': // Grass
 						g.image(tiles[0], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
 						break;
@@ -115,8 +118,12 @@ public class Map {
 					case '(':
 						g.image(tiles[3], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
 						break;
-				
-				}
+					case 'x': // Player starts here
+						g.fill(200, 200, 100);
+						g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
+						playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
+						// g.image(g.loadImage("people" + FileIO.fileSep + "p1" + "front.png"), (float)(playerStart.getX() - g.width * 0.03f), (float)(playerStart.getY() - g.width * 0.05f));
+				}	
 			}
 
 			g.pushMatrix();
@@ -156,6 +163,7 @@ public class Map {
 		this.m = m;
 	}
 	
+
 	//This method will basically go into the map and add all the
 	//following path symbols, to make terrain drawing easier
 	//
@@ -208,11 +216,15 @@ public class Map {
 					else
 						yeet+='5';
 				} else
-					yeet += '-';
+					yeet += raw.get(y).charAt(x);
 			}
 			cooked.add(yeet);
 		}
 		
 		return cooked;
+	}
+
+	public Point2D.Float getPlayerStart() {
+		return this.playerStart;
 	}
 }
