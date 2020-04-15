@@ -41,15 +41,6 @@ public class Map {
 	public void loadMap(int i) { // Loads a map, basically adding it to the appropriate arraylists
 		try {
 			map.add(fixMap(FileIO.reeeeeeeeeeeeeeeeeead("maps" + FileIO.fileSep + "m" + i)));
-			/*
-			 * ArrayList<Integer> yoink = new ArrayList<Integer>(); for (int j = 0; j <
-			 * map.get(map.size() - 1).get(0).length(); j++) { if (map.get(map.size() -
-			 * 1).get(0).indexOf(j + ":") != -1)
-			 * yoink.add(Integer.parseInt(map.get(map.size() - 1).get(0)
-			 * .substring(map.get(map.size() - 1).get(0).indexOf(j + ":") + 2,
-			 * map.get(map.size() - 1) .get(0).indexOf(",", map.get(map.size() -
-			 * 1).get(0).indexOf(j + ":") + 2)))); } mDet.add(yoink);
-			 */
 			maxX.add(0);
 			for (int j = 1; j < map.get(map.size() - 1).size(); j++)
 				if (maxX.get(maxX.size() - 1) < map.get(map.size() - 1).get(j).length())
@@ -122,7 +113,6 @@ public class Map {
 						g.fill(200, 200, 100);
 						g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
 						playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
-						// g.image(g.loadImage("people" + FileIO.fileSep + "p1" + "front.png"), (float)(playerStart.getX() - g.width * 0.03f), (float)(playerStart.getY() - g.width * 0.05f));
 				}	
 			}
 			g.pushMatrix();

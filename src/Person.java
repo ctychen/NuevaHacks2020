@@ -13,6 +13,7 @@ public abstract class Person {
 	protected int y;
 	protected int xi;
 	protected int yi;
+	protected int walkingAnimationPart = 1;
 	protected PImage[] frontIcons;
 	protected PImage[] leftIcons;
 	protected PImage[] rightIcons;
@@ -145,39 +146,43 @@ public abstract class Person {
 	}
 
 	public void moveUpIcon(PApplet p, int i) {
-		y+=normalSpeed;
+		y+=2*normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = frontIcons[1];
 		} else if (i % 10 == 0) {
 			currentIcon = frontIcons[2];
 		}
+		p.redraw();
 	}
 
 	public void moveLeftIcon(PApplet p, int i) {
-		x-=normalSpeed;
+		x-=2*normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = leftIcons[1];
 		} else if (i % 10 == 0) {
 			currentIcon = leftIcons[2];
 		}
+		p.redraw();
 	}
 
 	public void moveRightIcon(PApplet p, int i) {
-		x+=normalSpeed;
+		x+=2*normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = rightIcons[1];
 		} else if (i % 10 == 0) {
 			currentIcon = rightIcons[2];
 		}
+		p.redraw();
 	}
 
 	public void moveDownIcon(PApplet p, int i) {
-		y-=normalSpeed;
+		y-=2*normalSpeed;
 		if (i % 20 == 0) {
 			currentIcon = backIcons[1];
 		} else if (i % 10 == 0) {
 			currentIcon = backIcons[2];
 		}
+		p.redraw();
 	}
 
 }

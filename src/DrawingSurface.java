@@ -34,6 +34,16 @@ public class DrawingSurface extends PApplet {
 	
 	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
+	private int movingUpCounter = 0;
+	private int movingLeftCounter = 0;
+	private int movingRightCounter = 0;
+	private int movingDownCounter = 0;
+	
+	private boolean movingUp = false;
+	private boolean movingLeft = false;
+	private boolean movingDown = false;
+	private boolean movingRight = false;
+	
 	Clock fancyClock = Clock.systemDefaultZone();
 	
 	short selected = -1;
@@ -100,6 +110,7 @@ public class DrawingSurface extends PApplet {
 			player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 			player.draw(this);
 		}
+		redraw();
 	}
 	
 	public void drawSelection() {
@@ -154,8 +165,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	// List of keycodes here:
-	// https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list/31637206
-	// Useful keycodes: 16-Shift, 17-Ctrl, 18-Alt, 20-Caps, 27-Esc, 32-Space,
+	// https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list/32037206
+	// Useful keycodes: 20-Shift, 17-Ctrl, 18-Alt, 20-Caps, 27-Esc, 32-Space,
 	// 33-PageUp, 34-PageDown, 35-End, 36-Home, 48-57 is numbers 0-9, 65-90 is A-Z,
 	// 96-105 is numpad 0-9, 112-123 is F1-F12, 127-Del
 	public void keyPressed() {
@@ -171,12 +182,47 @@ public class DrawingSurface extends PApplet {
 		} else if (phase == PLAYING) {
 			if (keyCode == 38) { // up arrow
 	
+				player.moveUpIcon(this, movingUpCounter);
+	    		
+				movingUpCounter++;
+				
+				if(movingUpCounter == 20) {
+					movingUpCounter = 0;
+					movingUp = false;
+				}
+				
 			} else if (keyCode == 37) { // left arrow
-	
+				
+				player.moveLeftIcon(this, movingLeftCounter);
+    		
+				movingLeftCounter++;
+				
+				if(movingLeftCounter == 20) {
+					movingLeftCounter = 0;
+					movingLeft = false;
+				}
+				
 			} else if (keyCode == 40) { // down arrow
+				
+				player.moveDownIcon(this, movingDownCounter);
+	    		
+				movingDownCounter++;
+				
+				if(movingDownCounter == 20) {
+					movingDownCounter = 0;
+					movingDown = false;
+				}
 	
 			} else if (keyCode == 39) { // right arrow
 	
+				player.moveRightIcon(this, movingRightCounter);
+	    		
+				movingRightCounter++;
+				
+				if(movingRightCounter == 20) {
+					movingRightCounter = 0;
+					movingRight = false;
+				}
 			}
 	
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow
