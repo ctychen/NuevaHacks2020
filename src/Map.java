@@ -15,7 +15,7 @@ public class Map {
 	private ArrayList<Integer> maxY = new ArrayList<Integer>();
 
 	public int m; // Current map index
-	protected Point2D.Double playerStart = null;
+	protected Point2D.Float playerStart = null;
 	
 	public void loadMap(int i) { // Loads a map, basically adding it to the appropriate arraylists
 		try {
@@ -62,7 +62,8 @@ public class Map {
 				case 'x': // Player starts here
 					g.fill(200, 200, 100);
 					g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
-					playerStart = new Point2D.Double(g.width * 0.05f * j + g.width * 0.025f, g.width * 0.05f * (i - 1) + g.width * 0.025f);
+					playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
+					// g.image(g.loadImage("people" + FileIO.fileSep + "p1" + "front.png"), (float)(playerStart.getX() - g.width * 0.03f), (float)(playerStart.getY() - g.width * 0.05f));
 				}	
 			}
 
@@ -103,7 +104,7 @@ public class Map {
 		this.m = m;
 	}
 	
-	public Point2D.Double getPlayerStart() {
+	public Point2D.Float getPlayerStart() {
 		return this.playerStart;
 	}
 }

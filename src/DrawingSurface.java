@@ -97,6 +97,9 @@ public class DrawingSurface extends PApplet {
 			drawSelection();
 		else if (phase == PLAYING) {
 			map.draw(this, 0, 0);
+			player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+			//player.spawn(map.getCurrentMap(), this);
+			player.draw(this);
 		}
 	}
 	
@@ -162,9 +165,7 @@ public class DrawingSurface extends PApplet {
 				phase = PLAYING;
 				player = new Player(selected);
 				player.setImageIcons(this);
-				player.setPosition((int)(width*0.2), (int)(height*0.2));
-				player.spawn(map.getCurrentMap(), this);
-				player.draw(this);
+				
 			} else if (keyCode == 8) {
 				selected = -1;
 			}
