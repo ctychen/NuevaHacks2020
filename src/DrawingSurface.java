@@ -18,7 +18,7 @@ public class DrawingSurface extends PApplet {
 	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair", "Another Hat Guy", "Is this Burroughs?", "Bosdolf Stalters?"}; //names needed
 	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter", "Another yeeter with a hat", "Fancy Math/Java teacher", "Combo of Stalin and Hitler, with a bit of Bob Ross"}; //descriptions needed
 	
-	
+	public Map map = new Map();
 	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
 												// keycode is true, when it is released it gets set to false
@@ -83,6 +83,9 @@ public class DrawingSurface extends PApplet {
 			e.printStackTrace();
 		}
 		
+		map.loadMap(0);
+		map.setMap(0);
+		
 	}
 
 	// The statements in draw() are executed until the
@@ -93,7 +96,7 @@ public class DrawingSurface extends PApplet {
 		if (phase == BEGINING)
 			drawSelection();
 		else if (phase == PLAYING) {
-			//yeet
+			map.draw(this, 0, 0);
 		}
 	}
 	
