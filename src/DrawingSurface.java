@@ -98,7 +98,6 @@ public class DrawingSurface extends PApplet {
 		else if (phase == PLAYING) {
 			map.draw(this, 0, 0);
 			player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
-			//player.spawn(map.getCurrentMap(), this);
 			player.draw(this);
 		}
 	}

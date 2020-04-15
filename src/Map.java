@@ -66,7 +66,6 @@ public class Map {
 					// g.image(g.loadImage("people" + FileIO.fileSep + "p1" + "front.png"), (float)(playerStart.getX() - g.width * 0.03f), (float)(playerStart.getY() - g.width * 0.05f));
 				}	
 			}
-
 			g.pushMatrix();
 			g.pushStyle();
 			g.translate(-tx, -ty);
