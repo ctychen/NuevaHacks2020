@@ -20,6 +20,8 @@ public class Map {
 
 	public int m; // Current map index
 
+	PImage bigBoiImage;
+	
 	public Map(PApplet g) {
 		tiles = new PImage[] { 
 				g.loadImage("terrain" + FileIO.fileSep + "background.png"),      //0
@@ -136,17 +138,22 @@ public class Map {
 						break;
 				}	
 			}
-			g.pushMatrix();
-			g.pushStyle();
-			g.translate(-tx, -ty);
-			g.textAlign(PConstants.LEFT);
-			g.fill(255);
-			g.text(map.get(m).get(0).substring(map.get(m).get(0).indexOf('\"') + 1,
-					map.get(m).get(0).indexOf('\"', map.get(m).get(0).indexOf('\"') + 1)), 0, g.height * 0.03f);
-			g.popMatrix();
-			g.popStyle();
+			
 		}
-		}
+		g.saveFrame("cache" + FileIO.fileSep + "map.png");
+		bigBoiImage = g.loadImage("cache" + FileIO.fileSep + "map.png");
+		} else
+			g.image(bigBoiImage, 0, 0);
+		g.pushMatrix();
+		g.pushStyle();
+		g.translate(-tx, -ty);
+		g.textAlign(PConstants.LEFT);
+		g.fill(255);
+		g.text(map.get(m).get(0).substring(map.get(m).get(0).indexOf('\"') + 1,
+				map.get(m).get(0).indexOf('\"', map.get(m).get(0).indexOf('\"') + 1)), 0, g.height * 0.03f);
+		g.popMatrix();
+		g.popStyle();
+		
 		g.popStyle();
 	}
 
