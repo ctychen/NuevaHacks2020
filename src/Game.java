@@ -73,8 +73,8 @@ public class Game {
 		{
 			Person p = plist.get(i);
 			double distance=(Math.sqrt(Math.pow(player.x-p.x, 2) + Math.pow(player.y-p.y, 2)));
-			if(distance<DrawingSurface.DEFAULT_WIDTH/20) {
-				addedrisk+=(DrawingSurface.DEFAULT_WIDTH/20-distance)*(DrawingSurface.DEFAULT_WIDTH/20-distance)/80;
+			if(distance<DrawingSurface.DEFAULT_WIDTH/10) {
+				addedrisk+=(DrawingSurface.DEFAULT_WIDTH/10-distance)*(DrawingSurface.DEFAULT_WIDTH/10-distance)/80;
 				list.add(i);
 			}
 		}
