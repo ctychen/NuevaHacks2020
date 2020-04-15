@@ -48,8 +48,6 @@ public class Map {
 				if (maxX.get(maxX.size() - 1) < map.get(map.size() - 1).get(j).length())
 					maxX.set(maxX.size() - 1, map.get(map.size() - 1).get(j).length());
 			maxY.add(map.get(map.size() - 1).size());
-			System.out.println("This map is " + maxX.get(maxX.size() - 1) + " by " + maxY.get(maxY.size() - 1));
-
 		} catch (IOException e) {
 			System.out.println("Ruh Roh");
 			// TODO Auto-generated catch block
@@ -127,7 +125,6 @@ public class Map {
 								);
 							}
 						}
-						System.out.println("NPC started at " + npcSpawnPoints);
 						break;
 					case 'x': // Player starts here
 						g.fill(200, 200, 100);

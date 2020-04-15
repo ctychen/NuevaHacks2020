@@ -110,8 +110,6 @@ public class Person {
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
-		System.out.println("Trying to draw");
-		//System.out.println("Drawing at " + x + ", " + y);
 		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
@@ -121,7 +119,6 @@ public class Person {
 			for (int j = 0; j < map.get(i).length(); j++) {
 				if (map.get(i).charAt(j) == 'x') {
 					setPosition((int)(g.width*0.05f*(j)), (int)(g.width*0.05f*(i-1.5f)));
-					System.out.println("Placing at spawnpoint " + x + ", " + y);
 				}
 			}
 		}
