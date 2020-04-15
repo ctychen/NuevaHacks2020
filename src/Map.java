@@ -55,10 +55,13 @@ public class Map {
 		}
 	}
 
+	boolean drawn = false;
+	
 	public void draw(PApplet g, float tx, float ty, boolean init) {
 
 		g.pushStyle();
-
+		if (drawn == false) {
+			drawn = true;
 		for (int i = 1; i < map.get(m).size(); i++) {
 			for (int j = 0; j < map.get(m).get(i).length(); j++) {
 				g.stroke(0);
@@ -142,6 +145,7 @@ public class Map {
 					map.get(m).get(0).indexOf('\"', map.get(m).get(0).indexOf('\"') + 1)), 0, g.height * 0.03f);
 			g.popMatrix();
 			g.popStyle();
+		}
 		}
 		g.popStyle();
 	}

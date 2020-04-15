@@ -105,6 +105,7 @@ public class Person {
 //		};
 		// default icon is front-still
 		this.currentIcon = frontStill;
+		System.out.print("loaded images");
 	}
 	
 	public void draw(PApplet p) {

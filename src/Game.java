@@ -50,6 +50,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println("Risk="+player.risk);
 	}
 	
 	//changes initRisk by a certain amount, for risk based on reflex checks and PPE
