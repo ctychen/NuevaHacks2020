@@ -80,6 +80,7 @@ public class Person {
 		frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
 		leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
 		rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
+		
 		frontStepIcons = new PImage[] { 
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
@@ -92,18 +93,33 @@ public class Person {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
 		};
-//		backIcons = new PImage[] {
+//		backStepIcons = new PImage[] {
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 //		};
 		// default icon is front-still
+		frontStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		leftStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		rightStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+//		backStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		for (PImage e : frontStepIcons) {
+			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		}
+		for (PImage e : leftStepIcons) {
+			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		}
+		for (PImage e : rightStepIcons) {
+			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		}
 		this.currentIcon = frontStill;
-		System.out.print("loaded images");
+//		for (PImage e : backStepIcons) {
+//			e.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+//		}
 	}
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
-		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
+		p.image(currentIcon, x, y);
 		p.popStyle();
 	}
 	
