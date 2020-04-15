@@ -14,6 +14,8 @@ public class Map {
 	private ArrayList<Integer> maxX = new ArrayList<Integer>();
 	private ArrayList<Integer> maxY = new ArrayList<Integer>();
 	
+	private ArrayList<Point2D.Float> npcSpawnPoints = new ArrayList<Point2D.Float>();
+	
 	private PImage[] tiles;
 
 	public int m; // Current map index
@@ -46,8 +48,6 @@ public class Map {
 				if (maxX.get(maxX.size() - 1) < map.get(map.size() - 1).get(j).length())
 					maxX.set(maxX.size() - 1, map.get(map.size() - 1).get(j).length());
 			maxY.add(map.get(map.size() - 1).size());
-			System.out.println("This map is " + maxX.get(maxX.size() - 1) + " by " + maxY.get(maxY.size() - 1));
-
 		} catch (IOException e) {
 			System.out.println("Ruh Roh");
 			// TODO Auto-generated catch block
@@ -55,7 +55,7 @@ public class Map {
 		}
 	}
 
-	public void draw(PApplet g, float tx, float ty) {
+	public void draw(PApplet g, float tx, float ty, boolean init) {
 
 		g.pushStyle();
 
@@ -109,10 +109,28 @@ public class Map {
 					case '(':
 						g.image(tiles[3], g.width*0.05f*j, g.width*0.05f*(i-1), g.width*0.05f, g.width*0.05f);
 						break;
+					case '*': 
+						// NPC starts here
+						g.fill(255, 0, 0);
+						g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
+						if (init) {
+							if (npcSpawnPoints.size() == 0) {
+								npcSpawnPoints.add(
+										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+								);
+							}
+							else if (!equalsP2DF(npcSpawnPoints.get(npcSpawnPoints.size()-1), (new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)), 0.0001)) {
+								npcSpawnPoints.add(
+										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+								);
+							}
+						}
+						break;
 					case 'x': // Player starts here
 						g.fill(200, 200, 100);
 						g.rect(g.width * 0.05f * j, g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
 						playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
+						break;
 				}	
 			}
 			g.pushMatrix();
@@ -215,5 +233,17 @@ public class Map {
 
 	public Point2D.Float getPlayerStart() {
 		return this.playerStart;
+	}
+	
+	public ArrayList<Point2D.Float> getNPCStartingLocs() {
+		return this.npcSpawnPoints;
+	}
+
+	public boolean equalsP2DF(Point2D.Float p1, Point2D.Float p2, double tolerance) {
+		double x1 = p1.getX();
+		double x2 = p2.getX();
+		double y1 = p1.getY();
+		double y2 = p2.getY();
+		return ((Math.abs(x1 - x2) < tolerance) && (Math.abs(y1 - y2) < tolerance));
 	}
 }

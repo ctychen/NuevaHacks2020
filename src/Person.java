@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public abstract class Person {
+public class Person {
 
 	protected boolean isInfected;
 	protected double risk;
@@ -39,34 +39,34 @@ public abstract class Person {
 		this.personID = id + 1;
 		switch(personID) {
 		case 1: // blue haired person
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 7; // whatever these should be
+			maxSpeed = 10;
+			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 2: // blue hat guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 10; // whatever these should be
+			maxSpeed = 15;
+			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 3: // green fancy guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 9; // whatever these should be
+			maxSpeed = 12;
+			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 4: // red hat guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 10; // whatever these should be
+			maxSpeed = 15;
+			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 5: // boomer, gray hair
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
-			initRisk = 10;
+			initRisk = 15 + (int)(Math.random() * 10);
 			// ... //
 		case 6: // red haired hat weirdo
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
-			initRisk = 10;
+			initRisk = 10 + (int)(Math.random() * 10);
 			
 		// ... etc
 		}
@@ -87,8 +87,6 @@ public abstract class Person {
 		frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
 		leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
 		rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
-		backStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png");
-		
 		frontStepIcons = new PImage[] { 
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
@@ -106,13 +104,11 @@ public abstract class Person {
 //				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 //		};
 		// default icon is front-still
-		this.currentIcon = frontStill; 
-		p.frameRate(3);
+		this.currentIcon = frontStill;
 	}
 	
 	public void draw(PApplet p) {
 		p.pushStyle();
-		//System.out.println("Drawing at " + x + ", " + y);
 		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
@@ -122,7 +118,6 @@ public abstract class Person {
 			for (int j = 0; j < map.get(i).length(); j++) {
 				if (map.get(i).charAt(j) == 'x') {
 					setPosition((int)(g.width*0.05f*(j)), (int)(g.width*0.05f*(i-1.5f)));
-					System.out.println("Placing at spawnpoint " + x + ", " + y);
 				}
 			}
 		}
@@ -183,6 +178,32 @@ public abstract class Person {
 		currentIcon = frontStepIcons[i%frontStepIcons.length];
 		y+=p.width*0.001*normalSpeed;
 		
+	}
+	
+	public void draw(PApplet g, boolean[] keys) {
+		if (keys[g.UP]) {
+		}
+		if (keys[g.DOWN]) {
+		}
+		if (keys[g.LEFT]) {
+		}
+		if (keys[g.RIGHT]) {
+		}
+		else if (!keys[g.LEFT] && !keys[g.DOWN] && !keys[g.UP]) {
+			standStillIcon(g);
+		}
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public PImage getCurrentIcon() {
+		return this.currentIcon;
 	}
 
 }
