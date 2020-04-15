@@ -39,34 +39,34 @@ public class Person {
 		this.personID = id + 1;
 		switch(personID) {
 		case 1: // blue haired person
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 7; // whatever these should be
+			maxSpeed = 10;
+			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 2: // blue hat guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 10; // whatever these should be
+			maxSpeed = 15;
+			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 3: // green fancy guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 9; // whatever these should be
+			maxSpeed = 12;
+			initRisk = 5 + (int)(Math.random() * 5);
 			// ... //
 		case 4: // red hat guy
-			normalSpeed = 5; // whatever these should be
-			maxSpeed = 7;
-			initRisk = 10;
+			normalSpeed = 10; // whatever these should be
+			maxSpeed = 15;
+			initRisk = 3 + (int)(Math.random() * 5);
 			// ... //
 		case 5: // boomer, gray hair
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
-			initRisk = 10;
+			initRisk = 15 + (int)(Math.random() * 10);
 			// ... //
 		case 6: // red haired hat weirdo
 			normalSpeed = 5; // whatever these should be
 			maxSpeed = 7;
-			initRisk = 10;
+			initRisk = 10 + (int)(Math.random() * 10);
 			
 		// ... etc
 		}
