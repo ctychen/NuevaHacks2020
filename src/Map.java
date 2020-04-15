@@ -129,7 +129,7 @@ public class Map {
 								);
 								Person m_npc = new Person(1 + (int)(Math.random() * 5));
 								Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
-								m_npc.setPosition((int)(m_npcStart.getX()), (int)(m_npcStart.getY()));
+								m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
 								DrawingSurface.npc.add(m_npc);
 							}
 							else if (!equalsP2DF(npcSpawnPoints.get(npcSpawnPoints.size()-1), (new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)), 0.0001)) {
@@ -138,7 +138,7 @@ public class Map {
 								);
 								Person m_npc = new Person(1 + (int)(Math.random() * 5));
 								Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
-								m_npc.setPosition((int)(m_npcStart.getX()), (int)(m_npcStart.getY()));
+								m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
 								DrawingSurface.npc.add(m_npc);
 							}
 						}
