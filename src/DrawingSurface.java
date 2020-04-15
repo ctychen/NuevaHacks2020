@@ -136,7 +136,7 @@ public class DrawingSurface extends PApplet {
 			player.draw(this, keys);
 			translate(-tx, -ty);
 		}
-		//redraw();
+		redraw();
 	}
 	
 	public void drawSelection() {
@@ -253,8 +253,7 @@ public class DrawingSurface extends PApplet {
 				}
 			}*/
 	
-			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow
-								// keys or WASD
+			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
 				keyCode = this.UP;
 			else if (keyCode == 65)
 				keyCode = this.LEFT;
@@ -274,8 +273,7 @@ public class DrawingSurface extends PApplet {
 
 	public void keyReleased() {
 
-		if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow
-							// keys or WASD
+		if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
 			keyCode = this.UP;
 		else if (keyCode == 65)
 			keyCode = this.LEFT;

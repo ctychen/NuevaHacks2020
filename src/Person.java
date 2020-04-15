@@ -116,7 +116,7 @@ public abstract class Person {
 	public void draw(PApplet p) {
 		p.pushStyle();
 		//System.out.println("Drawing at " + x + ", " + y);
-		p.image(currentIcon, x, y);
+		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
 	
