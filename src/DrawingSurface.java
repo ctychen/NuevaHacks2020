@@ -161,8 +161,9 @@ public class DrawingSurface extends PApplet {
 			if (keyCode == 32) {
 				phase = PLAYING;
 				player = new Player(selected);
-				player.setLoc((int)(width*0.2), (int)(height*0.2));
+				player.setPosition((int)(width*0.2), (int)(height*0.2));
 				player.spawn(map.getCurrentMap(), this);
+				player.draw(this);
 			} else if (keyCode == 8) {
 				selected = -1;
 			}

@@ -94,20 +94,36 @@ public abstract class Person {
 		};
 	}
 	
+	public void draw(PApplet p) {
+		p.pushStyle();
+		System.out.println("Drawing at " + x + ", " + y);
+		p.image(currentIcon, x, y);
+		p.popStyle();
+	}
+	
 	public void spawn(ArrayList<String> map, PApplet g) {
 		for (int i = 0; i < map.size(); i++) {
 			for (int j = 0; j < map.get(i).length(); j++) {
 				if (map.get(i).charAt(j) == 'x') {
-					x = (int)(g.width*0.05f*(j));
-					y = (int)(g.width*0.05f*(i-1.5f));
+					setPosition((int)(g.width*0.05f*(j)), (int)(g.width*0.05f*(i-1.5f)));
 					System.out.println("Placing at spawnpoint " + x + ", " + y);
-					xi = x;
-					yi = y;
 				}
 			}
 		}
 	}
 
+	public void setPosition(int x, int y) {
+		setPosition(x, y, DrawingSurface.Direction.UP);
+	}
+	
+	public void setPosition(int x, int y, DrawingSurface.Direction dir) {
+		this.x = x;
+		this.y = y;
+		this.xi = x;
+		this.yi = y;
+		this.currentMovingDirection = dir;
+	}
+	
 	public void standStillIcon(PApplet p, int i) {
 		if (currentMovingDirection == DrawingSurface.Direction.UP) {
 			currentIcon = frontIcons[0];
