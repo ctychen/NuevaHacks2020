@@ -41,15 +41,8 @@ public class DrawingSurface extends PApplet {
 	
 	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
-//	private int movingUpCounter = 0;
-//	private int movingLeftCounter = 0;
-//	private int movingRightCounter = 0;
-//	private int movingDownCounter = 0;
-//	
-//	private boolean movingUp = false;
-//	private boolean movingLeft = false;
-//	private boolean movingDown = false;
-//	private boolean movingRight = false;
+	private PImage[] tipScreens;
+
 	
 	float tx = 0, ty = 0;
 	
@@ -136,15 +129,7 @@ public class DrawingSurface extends PApplet {
 			if (init) {
 				riskBar = new RiskBar(player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
 				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
-//				
-				for (int i = 0; i < map.getNPCStartingLocs().size(); i++) {
-					Person m_npc = new Person(1 + (int)(Math.random() * 5));
-					Point2D.Float m_npcStart = map.getNPCStartingLocs().get(i);
-					m_npc.setPosition((int)(m_npcStart.getX()), (int)(m_npcStart.getY()));
-					npc.add(m_npc);
-					}
 			}
-			
 			for (Person p : npc) {
 				p.move(player.getX(), player.getY());
 				p.setImageIcons(this);
@@ -155,6 +140,21 @@ public class DrawingSurface extends PApplet {
 			translate(-tx, -ty);
 		}
 		redraw();
+	}
+	
+	public void showTipScreen() {
+		tipScreens = new PImage[] {
+				this.loadImage("tips" + FileIO.fileSep + "0.png"),
+				this.loadImage("tips" + FileIO.fileSep + "1.png"),
+				this.loadImage("tips" + FileIO.fileSep + "2.png"),
+				this.loadImage("tips" + FileIO.fileSep + "3.png"),
+				this.loadImage("tips" + FileIO.fileSep + "4.png"),
+				this.loadImage("tips" + FileIO.fileSep + "5.png"),
+				this.loadImage("tips" + FileIO.fileSep + "6.png")
+			};
+		PImage tip = tipScreens[(int)(Math.random() * tipScreens.length)];
+		if (tip != null) tip.resize((int)(this.width), (int)(this.height));
+		this.image(tip, 0, 0);
 	}
 	
 	public void drawSelection() {

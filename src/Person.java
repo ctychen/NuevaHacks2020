@@ -98,6 +98,7 @@ public class Person {
 				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 		};
 		// default icon is front-still
+		currentIcon = frontStill;
 		System.out.print("loaded images");
 		
 		if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
