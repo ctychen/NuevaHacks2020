@@ -54,7 +54,7 @@ public class Vehicle {
 	public boolean collide(Player p, PApplet g) {
 		int distance = (int)(Math.sqrt( Math.pow(p.x-(this.x+g.width*0.035f), 2) + Math.pow(p.y-(this.y+g.width*0.05f), 2) ) + 0.5f);
 		
-		if (distance < g.width*0.035f)
+		if (distance < g.width*0.05f)
 			return true;
 		
 		return false;
