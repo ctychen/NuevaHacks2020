@@ -166,7 +166,7 @@ public class Person {
 	public void moveUpIcon(PApplet p, int i) {
 		
 		currentMovingDirection = DrawingSurface.Direction.UP;
-		currentIcon = backStepIcons[i%backStepIcons.length];
+		currentIcon = backStepIcons[(i/4)%backStepIcons.length];
 		y-=p.width*0.001*speed;
 
 	}
@@ -174,7 +174,7 @@ public class Person {
 	public void moveLeftIcon(PApplet p, int i) {;
 
 		currentMovingDirection = DrawingSurface.Direction.LEFT;
-		currentIcon = leftStepIcons[i%leftStepIcons.length];
+		currentIcon = leftStepIcons[(i/4)%leftStepIcons.length];
 		x-=p.width*0.001*speed;
 		
 	}
@@ -182,7 +182,7 @@ public class Person {
 	public void moveRightIcon(PApplet p, int i) {
 
 		currentMovingDirection = DrawingSurface.Direction.RIGHT;
-		currentIcon = rightStepIcons[i%rightStepIcons.length];
+		currentIcon = rightStepIcons[(i/4)%rightStepIcons.length];
 		x+=p.width*0.001*speed;
 		
 	}
@@ -190,7 +190,7 @@ public class Person {
 	public void moveDownIcon(PApplet p, int i) {
 
 		currentMovingDirection = DrawingSurface.Direction.DOWN;
-		currentIcon = frontStepIcons[i%frontStepIcons.length];
+		currentIcon = frontStepIcons[(i/4)%frontStepIcons.length];
 		y+=p.width*0.001*speed;
 		
 	}
