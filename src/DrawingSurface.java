@@ -174,6 +174,11 @@ public class DrawingSurface extends PApplet {
 			if (init) {
 				riskBar = new RiskBar(game.player.getRisk(), width*0.01f, 2 * height * 0.03f, width*0.015f, height*0.04f, 10, true);
 				game.player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+				game.setNPCsInfected();
+				System.out.println("NPCs infected: ");
+				for (Person p : game.plist) {
+					System.out.println(p.isInfected);
+				}
 			}
 			for (Person p : game.plist) {
 				p.move(game.player.getX(), game.player.getY());

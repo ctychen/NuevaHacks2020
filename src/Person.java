@@ -256,5 +256,9 @@ public class Person {
 	public PImage getCurrentIcon() {
 		return this.currentIcon;
 	}
+	
+	public void setInfected(boolean infected) {
+		this.isInfected = infected;
+	}
 
 }

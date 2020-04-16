@@ -15,6 +15,17 @@ public class Game {
 		numPoints=0;
 	}
 	
+	public void setNPCsInfected() {
+		for (int i = 0; i < plist.size(); i++) {
+			Person p = plist.get(i);
+			if (Math.random() < 0.2) { // npc's have 1/5 chance of starting out infected
+				p.setInfected(true);
+			} else {
+				p.setInfected(false);
+			}
+		}
+	}
+	
 	public void setPlayer(int p) {
 		player = new Player(p);
 		plist = new ArrayList<Person>();
@@ -35,7 +46,13 @@ public class Game {
 	//updates risk based on movement and does a check for infection
 	public void updateRisk() {
 		ArrayList<Integer> risklist = riskCalc();
+<<<<<<< HEAD
 		player.risk=player.initRisk+risklist.get(0);
+=======
+		if (player.risk < player.initRisk)
+			player.risk = player.initRisk;
+		player.risk=player.initRisk+ (int)(0.5*(player.risk - player.initRisk)) + risklist.get(0);
+>>>>>>> branch 'master' of https://github.com/ctychen/NuevaHacks2020
 		if(player.risk>100) {
 			player.risk=100;
 		}
@@ -86,7 +103,17 @@ public class Game {
 				double distance= player.getDistanceFrom(p);
 				
 				if(distance < DrawingSurface.safeDistance) {
+<<<<<<< HEAD
 					addedrisk+=(DrawingSurface.safeDistance-0.9*distance)*(DrawingSurface.safeDistance-0.9*distance)/80;
+=======
+					if (!p.isInfected) {
+						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
+					} else {
+						// Coronavirus is hella infectious, so if they're infected, your risk goes up way faster
+						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/3000;
+					}
+
+>>>>>>> branch 'master' of https://github.com/ctychen/NuevaHacks2020
 					list.add(i);
 					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
