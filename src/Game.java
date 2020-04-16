@@ -35,8 +35,6 @@ public class Game {
 	//updates risk based on movement and does a check for infection
 	public void updateRisk() {
 		ArrayList<Integer> risklist = riskCalc();
-		if (player.risk < player.initRisk)
-			player.risk = player.initRisk;
 		player.risk=player.initRisk+risklist.get(0);
 		if(player.risk>100) {
 			player.risk=100;
@@ -106,6 +104,7 @@ public class Game {
 		}
 		else
 		{
+			if(Math.random()*10==10)
 			numPoints++;
 		}
 		System.out.println(numPoints);
