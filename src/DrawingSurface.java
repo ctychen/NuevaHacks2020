@@ -100,8 +100,9 @@ public class DrawingSurface extends PApplet {
 		}
 		map = new Map(this);
 		map.loadMap(0);
-		map.setMap(0);
-		
+		map.loadMap(1);
+		map.setMap(1);
+		System.out.println("Yay map time");
 	}
 
 	// The statements in draw() are executed until the
