@@ -29,6 +29,11 @@ public class Person {
 	protected int vx, vy;
 	protected Pet pet;
 	
+	private int movingUpCounter = 0;
+	private int movingLeftCounter = 0;
+	private int movingRightCounter = 0;
+	private int movingDownCounter = 0;
+	
 	private boolean imageIconsSet = false;
 
 	public Person() {
@@ -178,6 +183,9 @@ public class Person {
 		currentIcon = backStepIcons[(i/4)%backStepIcons.length];
 		y-=p.width*0.001*speed;
 
+		movingUpCounter++;
+		movingUpCounter%=16;
+		
 	}
 
 	public void moveLeftIcon(PApplet p, int i) {;
@@ -186,6 +194,8 @@ public class Person {
 		currentIcon = leftStepIcons[(i/4)%leftStepIcons.length];
 		x-=p.width*0.001*speed;
 		
+		movingLeftCounter++;
+		movingLeftCounter%=16;
 	}
 
 	public void moveRightIcon(PApplet p, int i) {
@@ -194,6 +204,9 @@ public class Person {
 		currentIcon = rightStepIcons[(i/4)%rightStepIcons.length];
 		x+=p.width*0.001*speed;
 		
+		movingRightCounter++;
+		movingRightCounter%=16;
+		
 	}
 
 	public void moveDownIcon(PApplet p, int i) {
@@ -201,6 +214,9 @@ public class Person {
 		currentMovingDirection = DrawingSurface.Direction.DOWN;
 		currentIcon = frontStepIcons[(i/4)%frontStepIcons.length];
 		y+=p.width*0.001*speed;
+		
+		movingDownCounter++;
+		movingDownCounter%=16;
 		
 	}
 	
@@ -218,7 +234,7 @@ public class Person {
 		}
 	}
 	
-	public void move(int px, int py) {
+	public void move(int px, int py, PApplet p) {
 		px = (int)(Math.random()*200-100);
 		py = (int)(Math.random()*200-100);
 		float temp = (float)Math.sqrt( (px)*(px) + (py)*(py) );
@@ -229,6 +245,16 @@ public class Person {
 		}
 		x+=vx;
 		y+=vy;	
+		if (vx < 0) {
+			moveLeftIcon(p, movingLeftCounter);
+		} else {
+			moveRightIcon(p, movingRightCounter);
+		}
+		if (vy < 0) {
+			moveUpIcon(p, movingUpCounter);
+		} else {
+			moveDownIcon(p, movingDownCounter);
+		}
 	}
 	
 	public double getDistanceFrom(Person other) {

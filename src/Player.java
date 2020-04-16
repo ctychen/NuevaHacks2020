@@ -15,6 +15,8 @@ public class Player extends Person{
 		super(id);
 	}
 	
+
+	
 	public void draw(PApplet g, boolean[] keys, float tx, float ty) {
 		super.draw(g, tx, ty);
 		
