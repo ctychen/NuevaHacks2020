@@ -54,6 +54,7 @@ public class Map {
 				if (maxX.get(maxX.size() - 1) < map.get(map.size() - 1).get(j).length())
 					maxX.set(maxX.size() - 1, map.get(map.size() - 1).get(j).length());
 			maxY.add(map.get(map.size() - 1).size());
+			
 		} catch (IOException e) {
 			System.out.println("Ruh Roh");
 			// TODO Auto-generated catch block
@@ -64,91 +65,92 @@ public class Map {
 	boolean drawn = false;
 	
 	public void draw(PApplet g, float tx, float ty, boolean init) {
-
 		g.pushStyle();
 		/*if (drawn == false) {
 			drawn = true;*/
-		for (int i = 1; i < map.get(m).size(); i++) {
-			for (int j = 0; j < map.get(m).get(i).length(); j++) {
-				g.stroke(0);
-				switch ((char) map.get(m).get(i).charAt(j)) {
-
-					case '-': // Grass
-						g.image(tiles[0], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '=': // Path
-						g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '5':
-						g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '7':
-						g.image(tiles[4], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '8':
-						g.image(tiles[9], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '9':
-						g.image(tiles[2], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '4':
-						g.image(tiles[7], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '6':
-						g.image(tiles[8], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '1':
-						g.image(tiles[12], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '2':
-						g.image(tiles[1], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '3':
-						g.image(tiles[10], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '#':
-						g.image(tiles[11], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '!':
-						g.image(tiles[13], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '&':
-						g.image(tiles[5], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '(':
-						g.image(tiles[3], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
-						break;
-					case '*': 
-						// NPC starts here
-						g.fill(255, 0, 0);
-						g.rect(tx+g.width * 0.05f * j, ty+g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
-						if (init) {
-							if (npcSpawnPoints.size() == 0) {
-								npcSpawnPoints.add(
-										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
-								);
-								Person m_npc = new Person(1 + (int)(Math.random() * 5));
-								Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
-								m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
-								DrawingSurface.npc.add(m_npc);
+		if (map.get(m).size() > 1) {
+			for (int i = 1; i < map.get(m).size(); i++) {
+				for (int j = 0; j < map.get(m).get(i).length(); j++) {
+					g.stroke(0);
+					switch ((char) map.get(m).get(i).charAt(j)) {
+	
+						case '-': // Grass
+							g.image(tiles[0], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '=': // Path
+							g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '5':
+							g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '7':
+							g.image(tiles[4], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '8':
+							g.image(tiles[9], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '9':
+							g.image(tiles[2], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '4':
+							g.image(tiles[7], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '6':
+							g.image(tiles[8], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '1':
+							g.image(tiles[12], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '2':
+							g.image(tiles[1], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '3':
+							g.image(tiles[10], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '#':
+							g.image(tiles[11], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '!':
+							g.image(tiles[13], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '&':
+							g.image(tiles[5], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '(':
+							g.image(tiles[3], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							break;
+						case '*': 
+							// NPC starts here
+							g.fill(255, 0, 0);
+							g.rect(tx+g.width * 0.05f * j, ty+g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
+							if (init) {
+								if (npcSpawnPoints.size() == 0) {
+									npcSpawnPoints.add(
+											new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+									);
+									Person m_npc = new Person(1 + (int)(Math.random() * 5));
+									Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
+									m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
+									DrawingSurface.npc.add(m_npc);
+								}
+								else if (!equalsP2DF(npcSpawnPoints.get(npcSpawnPoints.size()-1), (new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)), 0.0001)) {
+									npcSpawnPoints.add(
+											new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+									);
+									Person m_npc = new Person(1 + (int)(Math.random() * 5));
+									Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
+									m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
+									DrawingSurface.npc.add(m_npc);
+								}
 							}
-							else if (!equalsP2DF(npcSpawnPoints.get(npcSpawnPoints.size()-1), (new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)), 0.0001)) {
-								npcSpawnPoints.add(
-										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
-								);
-								Person m_npc = new Person(1 + (int)(Math.random() * 5));
-								Point2D.Float m_npcStart = npcSpawnPoints.get(npcSpawnPoints.size()-1);
-								m_npc.setPosition((int)(tx+m_npcStart.getX()), (int)(ty+m_npcStart.getY()));
-								DrawingSurface.npc.add(m_npc);
-							}
-						}
-						break;
-					case 'x': // Player starts here
-						g.fill(200, 200, 100);
-						g.rect(tx+g.width * 0.05f * j, ty+g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
-						playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
-						break;
-				}	
+							break;
+						case 'x': // Player starts here
+							g.fill(200, 200, 100);
+							g.rect(tx+g.width * 0.05f * j, ty+g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
+							playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
+							break;
+					}	
+				}
 			}
 		}
 			/*
