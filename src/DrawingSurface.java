@@ -49,8 +49,6 @@ public class DrawingSurface extends PApplet {
 	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
 	
-	public static ArrayList<Person> npc = new ArrayList<Person>();
-	
 	public static int phase = BEGINNING;
 	
 	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 6; //How many playable characters are there
@@ -67,7 +65,8 @@ public class DrawingSurface extends PApplet {
 	Clock fancyClock = Clock.systemDefaultZone();
 	
 	short selected = -1;
-
+	
+	public static String playSound;
 
 	public static enum Direction { // wow, an enum? boi this aint c#
 		UP(0), DOWN(1), LEFT(2), RIGHT(3);
@@ -129,6 +128,26 @@ public class DrawingSurface extends PApplet {
 		}
 		else if (phase == PLAYING) {
 			clear();
+			
+			if (playSound != null) {
+				try {
+					File audioFile = new File("sound" + FileIO.fileSep + playSound);
+					AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+					AudioFormat format = audioStream.getFormat();
+					 
+					DataLine.Info info = new DataLine.Info(Clip.class, format);
+					Clip audioClip = (Clip) AudioSystem.getLine(info);
+					audioClip.open(audioStream);
+					audioClip.start();
+					//audioClip.close();
+					//audioStream.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				playSound = null;
+			}
+			
 			if (game == null)
 				game = new Game();
 			game.updateGame();
@@ -147,13 +166,13 @@ public class DrawingSurface extends PApplet {
 				ty = -((map.maxY()-1)*width*0.05f-height);
 			
 			//translate(tx, ty);
-			map.draw(this, tx, ty, init);
+			map.draw(this, tx, ty, init, game);
 			
 			if (init) {
 				riskBar = new RiskBar(game.player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
 				game.player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 			}
-			for (Person p : npc) {
+			for (Person p : game.plist) {
 				p.move(game.player.getX(), game.player.getY());
 				//p.setImageIcons(this); //BBBOOI THIS CAUSES LAG
 				p.draw(this, tx, ty);
