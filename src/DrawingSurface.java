@@ -5,6 +5,8 @@ import processing.core.PImage;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +19,27 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class DrawingSurface extends PApplet {
 
 	private String[] charNames = {"Weirdo", "Hat Guy", "Cool Hair", "Another Hat Guy", "Is this Burroughs?", "Bosdolf Stalters?"}; //names needed
 	private String[] desc = {"Spooky yeeter", "A yeeter with a hat", "A fancy yeeter", "Another yeeter with a hat", "Fancy Math/Java teacher", "Combo of Stalin and Hitler, with a bit of Bob Ross"}; //descriptions needed
+	private String[] instincts = {
+			"Oh no, someone sneezed near you! Did you turn away?",
+			"Someone's speaking really moistly, did you avoid it?",
+			"Your nose itches! Do you scratch it?",
+			"Your eyes feel dry, do you rub them?"
+	};
 	
 	public Map map;
 	
 	public RiskBar riskBar;
+	
+	private JOptionPane pane;
+	private JDialog dialog;
 	
 	private boolean init = true;
 	
@@ -234,11 +247,34 @@ public class DrawingSurface extends PApplet {
 	}
 	
 
-	public void choosePlayer(int id) { // shouldnt this be in the player class? oh wait, i just added it there
-	}
+	public void instinctClickSave() {
+		String instinct = instincts[(int)(Math.random() * instincts.length)];
+		pane = new JOptionPane();
+		dialog = pane.createDialog(frame, "Close this dialog as fast as possible to see if you were able to make the right choice...");
+		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+		dialog.setVisible(true);
+		Instant startTime = Instant.now();
+		Instant endTime = startTime; // placeholder
+		dialog.addWindowListener(new WindowAdapter() 
+		{
+		  Instant closed; 
+		  
+		  public void windowClosed(WindowEvent e)
+		  {
+			closed = Instant.now(); // stops counting your time
+		  }
 
-	public void standStill() {
-
+		  public void windowClosing(WindowEvent e)
+		  {
+			closed = Instant.now(); // stops counting your time
+		  }
+		  
+		  public Instant getEnd() {
+			  return closed;
+		  }
+		});
+		// todo access end instant from inline object
+		Duration timeElapsed = Duration.between(startTime, endTime); 
 	}
 	
 	public void mousePressed() { //Yeet, I like them triangles
