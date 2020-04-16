@@ -58,6 +58,16 @@ public class Game {
 				vlist.add(new Vehicle(true, false, (int)e.x, (int)e.y));
 			}
 		}
+		for (Point2D.Float e : map.getCarLeftStartingLocs()) {
+			if (Math.random() < 0.04 && e.y+ty > 0 && e.y+ty < g.height) {
+				vlist.add(new Vehicle(false, false, (int)e.x, (int)(e.y-g.width*0.04f)));
+			}
+		}
+		for (Point2D.Float e : map.getCarRightStartingLocs()) {
+			if (Math.random() < 0.04 && e.y+ty > 0 && e.y+ty < g.height) {
+				vlist.add(new Vehicle(false, true, (int)e.x, (int)(e.y-g.width*0.04f)));
+			}
+		}
 	}
 	
 	//updates risk based on movement and does a check for infection

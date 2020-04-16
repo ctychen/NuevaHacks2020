@@ -17,6 +17,8 @@ public class Map {
 	private ArrayList<Point2D.Float> npcSpawnPoints = new ArrayList<Point2D.Float>();
 	private ArrayList<Point2D.Float> carUpSpawnPoints = new ArrayList<Point2D.Float>();
 	private ArrayList<Point2D.Float> carDownSpawnPoints = new ArrayList<Point2D.Float>();
+	private ArrayList<Point2D.Float> carRightSpawnPoints = new ArrayList<Point2D.Float>();
+	private ArrayList<Point2D.Float> carLeftSpawnPoints = new ArrayList<Point2D.Float>();
 	private ArrayList<Point2D.Float> petSpawnPoints = new ArrayList<Point2D.Float>();
 	
 	private PImage[] tiles;
@@ -176,6 +178,22 @@ public class Map {
 								);
 							}
 							break;
+						case '>': // Horizontal moving cars start here
+							g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							if (init) {
+								carRightSpawnPoints.add(
+										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+								);
+							}
+							break;
+						case '<': // Horizontal moving cars start here
+							g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							if (init) {
+								carLeftSpawnPoints.add(
+										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+								);
+							}
+							break;
 					}	
 				}
 			}
@@ -298,6 +316,14 @@ public class Map {
 	
 	public ArrayList<Point2D.Float> getCarDownStartingLocs() {
 		return this.carDownSpawnPoints;
+	}
+	
+	public ArrayList<Point2D.Float> getCarLeftStartingLocs() {
+		return this.carLeftSpawnPoints;
+	}
+	
+	public ArrayList<Point2D.Float> getCarRightStartingLocs() {
+		return this.carRightSpawnPoints;
 	}
 
 	public boolean equalsP2DF(Point2D.Float p1, Point2D.Float p2, double tolerance) {
