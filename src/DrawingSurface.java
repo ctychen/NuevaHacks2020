@@ -43,6 +43,7 @@ public class DrawingSurface extends PApplet {
 	private JDialog dialog;
 	
 	private boolean init = true;
+	private boolean saveAttempted = false;
 	
 	private boolean[] keys = new boolean[300]; // Basically if a key is pressed then the boolean of the index of that
 												// keycode is true, when it is released it gets set to false
@@ -62,6 +63,7 @@ public class DrawingSurface extends PApplet {
 	Game game;
 	
 	float tx = 0, ty = 0;
+	char toPress = ' ';
 	
 	protected static double safeDistance;
 	
@@ -279,17 +281,29 @@ public class DrawingSurface extends PApplet {
 	
 	public void instinctKeySave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
-		pane = new JOptionPane();
-		dialog = pane.createDialog(frame, "Press" + "as fast as possible to see if you were able to make the right choice...");
-		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
-		dialog.setVisible(true);
-//		long startTime = System.currentTimeMillis();
-//		long endTime;
-		Instant startTime = Instant.now();
+		pane = new JOptionPane(instinct + "\nPress the key " + toPress + " as fast as possible to see if you were able to make the right choice...");
+		long startTime = System.currentTimeMillis();
+		long timePassed;
 		
 		// Random letter key for you to press
 		Random r = new Random();
-		char c = (char)(r.nextInt(26) + 'a');
+		toPress = (char)(r.nextInt(26) + 'a');
+		
+		dialog = pane.createDialog(frame, "Quick! Make a Save!");
+		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+		dialog.setVisible(true);
+		
+		if (saveAttempted) {
+			timePassed = endTime - startTime;
+			if (timePassed <= (80 + (int)(Math.random() * 200))) { // that's our time limit, may wanna change it
+				JOptionPane yeet = new JOptionPane("You were able to make the right decision, you're fine!");
+				JDialog spookyDialog = yeet.createDialog(frame, "");
+				spookyDialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+				spookyDialog.setVisible(true);
+			}	else {
+				
+			}
+		}
 		
 	}
 	
@@ -297,8 +311,8 @@ public class DrawingSurface extends PApplet {
 	
 	public void instinctClickSave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
-		pane = new JOptionPane();
-		dialog = pane.createDialog(frame, "Close this dialog as fast as possible to see if you were able to make the right choice...");
+		pane = new JOptionPane(instinct + "\nClose this dialog as fast as possible to see if you were able to make the right choice...");
+		dialog = pane.createDialog(frame, "Quick! Make a Save!");
 		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
 		dialog.setVisible(true);
 //		Instant startTime = Instant.now();
@@ -324,7 +338,12 @@ public class DrawingSurface extends PApplet {
 		});
 
 		long timePassed = (endTime-startTime);
-		if (timePassed <= (80 + (int)(Math.random() * 200))) {
+		if (timePassed <= (80 + (int)(Math.random() * 200))) { // that's our time limit, may wanna change it
+			JOptionPane yeet = new JOptionPane("You were able to make the right decision, you're fine!");
+			JDialog spookyDialog = yeet.createDialog(frame, "");
+			spookyDialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+			spookyDialog.setVisible(true);
+		} else {
 			
 		}
 		
@@ -393,6 +412,11 @@ public class DrawingSurface extends PApplet {
 		
 		else if (phase == PLAYING) {
 			init = false;
+			// this is for the instinct key press save
+			if (keyCode == java.awt.event.KeyEvent.getExtendedKeyCodeForChar(toPress)) {
+				saveAttempted = true;
+				endTime = System.currentTimeMillis();
+			}
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
 				keyCode = this.UP;
 			else if (keyCode == 65)
