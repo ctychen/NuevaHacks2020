@@ -8,10 +8,11 @@ public class Game {
 	protected int numInfected;
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist;
+	protected static int numPoints;
 
 	
 	public Game() {
-		
+		numPoints=0;
 	}
 	
 	public void setPlayer(int p) {
@@ -26,6 +27,7 @@ public class Game {
 		//recalculate risk and update player/npc infection status if necessary
 		//update score
 		//check game state
+		updateGameStatus();
 		updateRisk();
 		
 	}
@@ -98,6 +100,15 @@ public class Game {
 		return list;
 	}
 	
-	
+	public void updateGameStatus() {
+		if(player.isInfected) {
+			
+		}
+		else
+		{
+			numPoints++;
+		}
+		System.out.println(numPoints);
+	}
 	
 }
