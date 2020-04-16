@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -247,35 +248,59 @@ public class DrawingSurface extends PApplet {
 		window.setVisible(true);
 	}
 	
-
+	
+	public void instinctKeySave() {
+		String instinct = instincts[(int)(Math.random() * instincts.length)];
+		pane = new JOptionPane();
+		dialog = pane.createDialog(frame, "Press" + "as fast as possible to see if you were able to make the right choice...");
+		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+		dialog.setVisible(true);
+//		long startTime = System.currentTimeMillis();
+//		long endTime;
+		Instant startTime = Instant.now();
+		
+		// Random letter key for you to press
+		Random r = new Random();
+		char c = (char)(r.nextInt(26) + 'a');
+		
+	}
+	
+	long endTime; // should get set when user closes dialog box
+	
 	public void instinctClickSave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
 		pane = new JOptionPane();
 		dialog = pane.createDialog(frame, "Close this dialog as fast as possible to see if you were able to make the right choice...");
 		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
 		dialog.setVisible(true);
-		Instant startTime = Instant.now();
-		Instant endTime = startTime; // placeholder
+//		Instant startTime = Instant.now();
+//		Instant endTime = startTime; // placeholder
+		long startTime = System.currentTimeMillis();
+		
 		dialog.addWindowListener(new WindowAdapter() 
 		{
-		  Instant closed; 
-		  
+//		  Instant closed; 
 		  public void windowClosed(WindowEvent e)
 		  {
-			closed = Instant.now(); // stops counting your time
-		  }
-
-		  public void windowClosing(WindowEvent e)
-		  {
-			closed = Instant.now(); // stops counting your time
+//			closed = Instant.now(); // stops counting your time
+			endTime = System.currentTimeMillis();
 		  }
 		  
-		  public Instant getEnd() {
-			  return closed;
+		  public long getEnd() {
+			  return endTime;
 		  }
+		  
+//		  public Instant getEnd() {
+//			  return closed;
+//		  }
 		});
-		// todo access end instant from inline object
-		Duration timeElapsed = Duration.between(startTime, endTime); 
+
+		long timePassed = (endTime-startTime);
+		if (timePassed <= (80 + (int)(Math.random() * 200))) {
+			
+		}
+		
+		// Duration timeElapsed = Duration.between(startTime, endTime); 
 	}
 	
 	public void mousePressed() { //Yeet, I like them triangles
