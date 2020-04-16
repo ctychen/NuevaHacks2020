@@ -16,6 +16,17 @@ public class Game {
 		
 	}
 	
+	public void setNPCsInfected() {
+		for (int i = 0; i < plist.size(); i++) {
+			Person p = plist.get(i);
+			if (Math.random() < 0.2) { // npc's have 1/5 chance of starting out infected
+				p.setInfected(true);
+			} else {
+				p.setInfected(false);
+			}
+		}
+	}
+	
 	public void setPlayer(int p) {
 		player = new Player(p);
 		plist = new ArrayList<Person>();
@@ -51,7 +62,7 @@ public class Game {
 		ArrayList<Integer> risklist = riskCalc();
 		if (player.risk < player.initRisk)
 			player.risk = player.initRisk;
-		player.risk=player.initRisk+risklist.get(0);
+		player.risk=player.initRisk+ (int)(0.5*(player.risk - player.initRisk)) + risklist.get(0);
 		if(player.risk>100) {
 			player.risk=100;
 		}
@@ -102,7 +113,13 @@ public class Game {
 				double distance= player.getDistanceFrom(p);
 				
 				if(distance < DrawingSurface.safeDistance) {
-					addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
+					if (!p.isInfected) {
+						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
+					} else {
+						// Coronavirus is hella infectious, so if they're infected, your risk goes up way faster
+						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/3000;
+					}
+
 					list.add(i);
 					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
