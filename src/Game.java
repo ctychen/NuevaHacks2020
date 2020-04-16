@@ -103,17 +103,13 @@ public class Game {
 				double distance= player.getDistanceFrom(p);
 				
 				if(distance < DrawingSurface.safeDistance) {
-<<<<<<< HEAD
 					addedrisk+=(DrawingSurface.safeDistance-0.9*distance)*(DrawingSurface.safeDistance-0.9*distance)/80;
-=======
 					if (!p.isInfected) {
 						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
 					} else {
 						// Coronavirus is hella infectious, so if they're infected, your risk goes up way faster
 						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/3000;
 					}
-
->>>>>>> branch 'master' of https://github.com/ctychen/NuevaHacks2020
 					list.add(i);
 					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
