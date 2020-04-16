@@ -5,6 +5,8 @@ import processing.core.PImage;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
@@ -20,6 +22,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -310,8 +313,9 @@ public class DrawingSurface extends PApplet {
 		dialog = pane.createDialog(frame, "Game Over");
 		dialog.setLocation((int)(width/4),(int)(height/2));
 		pane.setLocation((int)(width/4),(int)(height/2));
-		dialog.setVisible(true);
+		   
 		dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
 
 	}
 	
