@@ -87,7 +87,7 @@ public class Game {
 				double distance= player.getDistanceFrom(p);
 				
 				if(distance < DrawingSurface.safeDistance) {
-					addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/500;
+					addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
 					list.add(i);
 					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
