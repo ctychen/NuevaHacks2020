@@ -146,7 +146,7 @@ public class Game {
 	
 	public void updateGameStatus() {
 		if(player.isInfected) {
-			if(Math.random()*15==10)
+			if((int)(Math.random()*15)==10)
 			{
 				numPoints++;
 			}
@@ -154,7 +154,7 @@ public class Game {
 		}
 		else
 		{
-			if(Math.random()*10==10)
+			if((int)(Math.random()*10)==10)
 			{
 				numPoints++;
 			}
