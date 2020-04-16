@@ -273,7 +273,7 @@ public class DrawingSurface extends PApplet {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window.setSize(instr.DRAWING_WIDTH, instr.DRAWING_HEIGHT);
 		window.setMinimumSize(new Dimension(100, 100));
-		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setResizable(true);
 		window.setLocation(screenSize.width / 2 - window.getSize().width / 2,
 				screenSize.height / 2 - window.getSize().height / 2);
@@ -290,7 +290,7 @@ public class DrawingSurface extends PApplet {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		window.setSize(a.DRAWING_WIDTH, a.DRAWING_HEIGHT);
 		window.setMinimumSize(new Dimension(100, 100));
-		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setResizable(true);
 		window.setLocation(screenSize.width / 2 - window.getSize().width / 2,
 				screenSize.height / 2 - window.getSize().height / 2);
@@ -303,13 +303,16 @@ public class DrawingSurface extends PApplet {
 				(game.player.getHit() ? "Oh no, you got hit by a car, it's over!" : 
 					"Unfortunately, you got infected, and now symptoms are kicking in! You have to stop.") + 
 				"\n Here are your stats:" +
-				"\n Your total points: " + game.numPoints + 
 				"\n You infected " + game.numInfected + " other people." + 
+				"\n Your total points: " + game.numPoints + " - 1000*" + game.numInfected + "people infected = " + (game.numPoints-1000*game.numInfected) +
 				"\n This is why socially distancing is important!"
 				);
 		dialog = pane.createDialog(frame, "Game Over");
+		dialog.setLocation((int)(width/4),(int)(height/2));
 		pane.setLocation((int)(width/4),(int)(height/2));
-		
+		dialog.setVisible(true);
+		dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 	}
 	
 	
