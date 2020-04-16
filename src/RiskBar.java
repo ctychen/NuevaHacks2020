@@ -39,6 +39,7 @@ public class RiskBar {
 		if (currentRisk + amount >= MAX_RISK) {
 			// "YOU'RE OOFED" effect shows	
 			text = "HA YOU'RE OOFED!";
+			DrawingSurface.playSound = "oof.wav";
 		}
 		else if (currentRisk + amount <= 0) {
 			currentRisk = 0;
@@ -55,8 +56,10 @@ public class RiskBar {
 			currentRisk = 0;
 		else if (currentRisk > MAX_RISK)
 			currentRisk = MAX_RISK;
-		if (currentRisk == MAX_RISK)
+		if (currentRisk == MAX_RISK) {
 			text = "HA YOU'RE OOFED!";
+			DrawingSurface.playSound = "oof.wav";
+		}
 	}
 
 	public void draw(PApplet p) {

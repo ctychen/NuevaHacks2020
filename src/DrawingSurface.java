@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -47,8 +48,7 @@ public class DrawingSurface extends PApplet {
 												// keycode is true, when it is released it gets set to false
 	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
-	
-	public static ArrayList<Person> npc = new ArrayList<Person>();
+	public static final int LOADING = 2;
 	
 	public static int phase = BEGINNING;
 	
@@ -63,10 +63,13 @@ public class DrawingSurface extends PApplet {
 	
 	float tx = 0, ty = 0;
 	
+	protected static double safeDistance;
+	
 	Clock fancyClock = Clock.systemDefaultZone();
 	
 	short selected = -1;
-
+	
+	public static String playSound;
 
 	public static enum Direction { // wow, an enum? boi this aint c#
 		UP(0), DOWN(1), LEFT(2), RIGHT(3);
@@ -128,6 +131,26 @@ public class DrawingSurface extends PApplet {
 		}
 		else if (phase == PLAYING) {
 			clear();
+			
+			if (playSound != null) {
+				try {
+					File audioFile = new File("sound" + FileIO.fileSep + playSound);
+					AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+					AudioFormat format = audioStream.getFormat();
+					 
+					DataLine.Info info = new DataLine.Info(Clip.class, format);
+					Clip audioClip = (Clip) AudioSystem.getLine(info);
+					audioClip.open(audioStream);
+					audioClip.start();
+					//audioClip.close();
+					//audioStream.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				playSound = null;
+			}
+			
 			if (game == null)
 				game = new Game();
 			game.updateGame();
@@ -146,21 +169,22 @@ public class DrawingSurface extends PApplet {
 				ty = -((map.maxY()-1)*width*0.05f-height);
 			
 			//translate(tx, ty);
-			map.draw(this, tx, ty, init);
+			map.draw(this, tx, ty, init, game);
 			
 			if (init) {
 				riskBar = new RiskBar(game.player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
 				game.player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 			}
-			for (Person p : npc) {
+			for (Person p : game.plist) {
 				p.move(game.player.getX(), game.player.getY());
-				p.setImageIcons(this);
 				p.draw(this, tx, ty);
 			}
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;
-				System.out.println("Increasing Risk");
 			}
+			
+			safeDistance = this.width*0.06f+0.5f;
+			
 			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);
 			game.player.draw(this, keys, tx, ty);
@@ -247,35 +271,59 @@ public class DrawingSurface extends PApplet {
 		window.setVisible(true);
 	}
 	
-
+	
+	public void instinctKeySave() {
+		String instinct = instincts[(int)(Math.random() * instincts.length)];
+		pane = new JOptionPane();
+		dialog = pane.createDialog(frame, "Press" + "as fast as possible to see if you were able to make the right choice...");
+		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+		dialog.setVisible(true);
+//		long startTime = System.currentTimeMillis();
+//		long endTime;
+		Instant startTime = Instant.now();
+		
+		// Random letter key for you to press
+		Random r = new Random();
+		char c = (char)(r.nextInt(26) + 'a');
+		
+	}
+	
+	long endTime; // should get set when user closes dialog box
+	
 	public void instinctClickSave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
 		pane = new JOptionPane();
 		dialog = pane.createDialog(frame, "Close this dialog as fast as possible to see if you were able to make the right choice...");
 		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
 		dialog.setVisible(true);
-		Instant startTime = Instant.now();
-		Instant endTime = startTime; // placeholder
+//		Instant startTime = Instant.now();
+//		Instant endTime = startTime; // placeholder
+		long startTime = System.currentTimeMillis();
+		
 		dialog.addWindowListener(new WindowAdapter() 
 		{
-		  Instant closed; 
-		  
+//		  Instant closed; 
 		  public void windowClosed(WindowEvent e)
 		  {
-			closed = Instant.now(); // stops counting your time
-		  }
-
-		  public void windowClosing(WindowEvent e)
-		  {
-			closed = Instant.now(); // stops counting your time
+//			closed = Instant.now(); // stops counting your time
+			endTime = System.currentTimeMillis();
 		  }
 		  
-		  public Instant getEnd() {
-			  return closed;
+		  public long getEnd() {
+			  return endTime;
 		  }
+		  
+//		  public Instant getEnd() {
+//			  return closed;
+//		  }
 		});
-		// todo access end instant from inline object
-		Duration timeElapsed = Duration.between(startTime, endTime); 
+
+		long timePassed = (endTime-startTime);
+		if (timePassed <= (80 + (int)(Math.random() * 200))) {
+			
+		}
+		
+		// Duration timeElapsed = Duration.between(startTime, endTime); 
 	}
 	
 	public void mousePressed() { //Yeet, I like them triangles
@@ -314,19 +362,30 @@ public class DrawingSurface extends PApplet {
 				displayAbout();
 			}
 			if (selected != -1) {
-				if (keyCode == 32) {
-					phase = PLAYING;
-					game = new Game();
-					game.setPlayer(selected);
-					game.player.setImageIcons(this);
+				if (keyCode == 32) { // Draws the loading screens with spicy spicy tips
+					//phase = PLAYING;
+					phase = LOADING;
+					showTipScreen();
+//					game = new Game();
+//					game.setPlayer(selected);
+//					game.player.setImageIcons(this);
 					
 				} else if (keyCode == 8) {
 					selected = -1;
 				}
 			}
 			
-			
 		}
+		else if (phase == LOADING) {
+			if (keyCode == 32) {
+				phase = PLAYING;
+				game = new Game();
+				game.setPlayer(selected);
+				game.player.setImageIcons(this);
+				
+			}
+		}
+		
 		else if (phase == PLAYING) {
 			init = false;
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD

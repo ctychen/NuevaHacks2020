@@ -33,7 +33,9 @@ public class Game {
 	//updates risk based on movement and does a check for infection
 	public void updateRisk() {
 		ArrayList<Integer> risklist = riskCalc();
-		player.risk=player.initRisk+risklist.get(0);
+		if (player.risk < player.initRisk)
+			player.risk = player.initRisk;
+		player.risk=player.risk+risklist.get(0);
 		if(player.risk>100) {
 			player.risk=100;
 		}
@@ -81,14 +83,18 @@ public class Game {
 			for(int i=0;i<plist.size();i++)
 			{
 				Person p = plist.get(i);
-				double distance=(Math.sqrt(Math.pow(player.x-p.x, 2) + Math.pow(player.y-p.y, 2)));
-				if(distance<DrawingSurface.DEFAULT_WIDTH/10) {
-					addedrisk+=(DrawingSurface.DEFAULT_WIDTH/10-distance)*(DrawingSurface.DEFAULT_WIDTH/10-distance)/80;
+				double distance= player.getDistanceFrom(p);
+				
+				if(distance < DrawingSurface.safeDistance) {
+					addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
 					list.add(i);
+					System.out.println("Added " + addedrisk);
+					DrawingSurface.playSound = "scream.wav";
 				}
 			}
 		}
 		list.set(0, addedrisk);
+		System.out.println("Risk is " + player.getRisk());
 		return list;
 	}
 	
