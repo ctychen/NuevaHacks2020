@@ -83,6 +83,7 @@ public class Person {
 			frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
 			leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
 			rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
+			backStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png");
 			
 			frontStepIcons = new PImage[] { 
 					p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
