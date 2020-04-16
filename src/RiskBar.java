@@ -69,7 +69,7 @@ public class RiskBar {
 		if (!upwards)
 			p.rect(x, y, (float) (width * ((float) currentRisk / MAX_RISK)), height, roundness);
 		else
-			p.rect(x, y, width, (float) (height * ((float) currentRisk / MAX_RISK)), roundness);
+			p.rect(x, y+height, width, - (float) (height * ((float) currentRisk / MAX_RISK)), roundness);
 		p.text(text, x+width*0.5f, y+height*1.4f);
 	}
 
