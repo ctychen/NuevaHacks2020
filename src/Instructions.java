@@ -19,12 +19,12 @@ public class Instructions extends PApplet{
 		popStyle();
 		fill(0);
 		textAlign(CENTER);
-		textSize(50);
-		textSize(width*(float)Math.random()*0.03f+0.05f*width);
+		textSize(30);
+		textSize(width*(float)Math.random()*0.02f+0.03f*width);
 		//translate(-width*0.1f, -height*0.1f);
 		translate(width/2 - 200, height/2 - 190);
 		fill((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
-		text("Game Instructions", width/2+(int)(Math.random()*10), height-(int)(Math.random()*10));
+		text("Game Instructions", width/4+(int)(Math.random()*10), (int)(Math.random()*height/7));
 		
 	}
 	
