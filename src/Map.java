@@ -15,6 +15,7 @@ public class Map {
 	private ArrayList<Integer> maxY = new ArrayList<Integer>();
 	
 	private ArrayList<Point2D.Float> npcSpawnPoints = new ArrayList<Point2D.Float>();
+	private ArrayList<Point2D.Float> carSpawnPoints = new ArrayList<Point2D.Float>();
 	
 	private PImage[] tiles;
 
@@ -149,6 +150,14 @@ public class Map {
 							g.rect(tx+g.width * 0.05f * j, ty+g.width * 0.05f * (i - 1), g.width * 0.05f, g.width * 0.05f);
 							playerStart = new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f);
 							break;
+						case '+': // Vertical moving cars start here
+							g.image(tiles[6], tx+g.width*0.05f*j, ty+g.width*0.05f*(i-1));
+							if (init) {
+								carSpawnPoints.add(
+										new Point2D.Float(g.width * 0.05f * j + g.width * 0.025f - g.width * 0.03f, g.width * 0.05f * (i - 1) + g.width * 0.025f - g.width * 0.05f)
+								);
+							}
+							break;
 					}	
 				}
 			}
@@ -263,6 +272,10 @@ public class Map {
 	
 	public ArrayList<Point2D.Float> getNPCStartingLocs() {
 		return this.npcSpawnPoints;
+	}
+	
+	public ArrayList<Point2D.Float> getCarStartingLocs() {
+		return this.carSpawnPoints;
 	}
 
 	public boolean equalsP2DF(Point2D.Float p1, Point2D.Float p2, double tolerance) {
