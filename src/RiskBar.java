@@ -11,7 +11,9 @@ public class RiskBar {
 	float[] riskColor = {255, 0, 0}; // change this
 	float[] warningColor = {255, 255, 0}; // change this
 	boolean upwards = false;
-
+	
+	String text = "";
+	
 	// Horizontal 
 	public RiskBar(float startingRisk, float width, float height, float x, float y, float roundness) {
 		this.height = height;
@@ -36,12 +38,14 @@ public class RiskBar {
 	public void change(float amount) {
 		if (currentRisk + amount >= MAX_RISK) {
 			// "YOU'RE OOFED" effect shows	
+			text = "HA YOU'RE OOFED!";
 		}
 		else if (currentRisk + amount <= 0) {
 			currentRisk = 0;
 		}
 		else {
 			currentRisk += amount;	
+			text = "Ruh roh, you just gained some risk";
 		}
 	}
 
@@ -51,6 +55,8 @@ public class RiskBar {
 			currentRisk = 0;
 		else if (currentRisk > MAX_RISK)
 			currentRisk = MAX_RISK;
+		if (currentRisk == MAX_RISK)
+			text = "HA YOU'RE OOFED!";
 	}
 
 	public void draw(PApplet p) {
@@ -61,6 +67,7 @@ public class RiskBar {
 			p.rect(x, y, (float) (width * ((float) currentRisk / MAX_RISK)), height, roundness);
 		else
 			p.rect(x, y, width, (float) (height * ((float) currentRisk / MAX_RISK)), roundness);
+		p.text(text, x+width*0.5f, y+height*1.4f);
 	}
 
 }
