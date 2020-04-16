@@ -39,6 +39,7 @@ public class DrawingSurface extends PApplet {
 	
 	public RiskBar riskBar;
 	
+	private JFrame frame = new JFrame("Fancy Window");
 	private JOptionPane pane;
 	private JDialog dialog;
 	
@@ -69,6 +70,7 @@ public class DrawingSurface extends PApplet {
 	protected static double safeDistance;
 	
 	Clock fancyClock = Clock.systemDefaultZone();
+	long endTime; // should get set when user closes dialog box, and when game end
 	
 	short selected = -1;
 	
@@ -154,8 +156,9 @@ public class DrawingSurface extends PApplet {
 				playSound = null;
 			}
 			
-			if (game == null)
+			if (game == null) {
 				game = new Game();
+			}
 			game.updateGame(map, this, tx, ty);
 			if(game.player.x >= width*0.5f && game.player.x <= map.maxX()*width*0.05f-width*0.5f)
 				tx= -game.player.x+width*0.5f;
@@ -197,6 +200,7 @@ public class DrawingSurface extends PApplet {
 					i--;
 				} else if (game.vlist.get(i).collide(game.player, this)) {
 					System.out.println("You just got run over!");
+					game.player.gotHit(true);
 					phase = DEAD;
 				}
 					
@@ -210,6 +214,7 @@ public class DrawingSurface extends PApplet {
 			//translate(-tx, -ty);
 		} else if (phase == DEAD) {
 			g.text("HA YOU'RE DEAD!!!! JOKES ON YOU!!!", width/2, height/2);
+			displayStats();
 		}
 		redraw();
 	}
@@ -292,6 +297,21 @@ public class DrawingSurface extends PApplet {
 		window.setVisible(true);
 	}
 	
+	public void displayStats() {
+		
+		pane = new JOptionPane(
+				(game.player.getHit() ? "Oh no, you got hit by a car, it's over!" : 
+					"Unfortunately, you got infected, and now symptoms are kicking in! You have to stop.") + 
+				"\n Here are your stats:" +
+				"\n Your total points: " + game.numPoints + 
+				"\n You infected " + game.numInfected + " other people." + 
+				"\n This is why socially distancing is important!"
+				);
+		dialog = pane.createDialog(frame, "Game Over");
+		pane.setLocation((int)(width/4),(int)(height/2));
+		
+	}
+	
 	
 	public void instinctKeySave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
@@ -320,8 +340,6 @@ public class DrawingSurface extends PApplet {
 		}
 		
 	}
-	
-	long endTime; // should get set when user closes dialog box
 	
 	public void instinctClickSave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
