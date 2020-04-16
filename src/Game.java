@@ -4,7 +4,7 @@ public class Game {
 	
 	public static final int front = 0, frontstep1 = 1, frontstep2 = 2, right = 3, rightstep1 = 4, rightstep2 = 5, left = 6, leftstep1 = 7, leftstep2 = 8, back = 9, backstep1 = 10, backstep2=11;
 	
-	protected Player player;
+	public Player player;
 	protected int numInfected;
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist;
@@ -14,12 +14,18 @@ public class Game {
 		
 	}
 	
+	public void setPlayer(int p) {
+		player = new Player(p);
+	}
+	
 	public void updateGame() {
 		//calls methods to:
 		//move NPCs, cars, and pets
 		//recalculate risk and update player/npc infection status if necessary
 		//update score
 		//check game state
+		updateRisk();
+		
 	}
 	
 	//updates risk based on movement and does a check for infection
@@ -50,7 +56,6 @@ public class Game {
 				}
 			}
 		}
-		System.out.println("Risk="+player.risk);
 	}
 	
 	//changes initRisk by a certain amount, for risk based on reflex checks and PPE
@@ -67,16 +72,19 @@ public class Game {
 	//calculates distance from player to other NPCs, calculates risk based off of that
 	//returns arraylist of ints with added risk first, then the indices of all the people nearby that are infected
 	private ArrayList<Integer> riskCalc() {
+		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		int addedrisk=0;
 		list.add(0);
-		for(int i=0;i<plist.size();i++)
-		{
-			Person p = plist.get(i);
-			double distance=(Math.sqrt(Math.pow(player.x-p.x, 2) + Math.pow(player.y-p.y, 2)));
-			if(distance<DrawingSurface.DEFAULT_WIDTH/10) {
-				addedrisk+=(DrawingSurface.DEFAULT_WIDTH/10-distance)*(DrawingSurface.DEFAULT_WIDTH/10-distance)/80;
-				list.add(i);
+		if (plist != null && plist.size() > 0) {
+			for(int i=0;i<plist.size();i++)
+			{
+				Person p = plist.get(i);
+				double distance=(Math.sqrt(Math.pow(player.x-p.x, 2) + Math.pow(player.y-p.y, 2)));
+				if(distance<DrawingSurface.DEFAULT_WIDTH/10) {
+					addedrisk+=(DrawingSurface.DEFAULT_WIDTH/10-distance)*(DrawingSurface.DEFAULT_WIDTH/10-distance)/80;
+					list.add(i);
+				}
 			}
 		}
 		list.set(0, addedrisk);

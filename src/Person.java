@@ -7,8 +7,8 @@ import processing.core.PImage;
 public class Person {
 
 	protected boolean isInfected;
-	protected int risk;
-	protected int initRisk; // max risk should be 100 or something 
+	protected int risk = 0;
+	protected int initRisk = 0; // max risk should be 100 or something 
 	protected int x;
 	protected int y;
 	protected int xi;
@@ -118,7 +118,7 @@ public class Person {
 		if (backStepIcons[0] != null) backStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 		if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
 	}
-	
+		
 	public void draw(PApplet p, float tx, float ty) {
 		p.pushStyle();
 		if (currentIcon != null)

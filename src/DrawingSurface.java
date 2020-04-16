@@ -35,7 +35,6 @@ public class DrawingSurface extends PApplet {
 	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
 	
-	public Player player;
 	public static ArrayList<Person> npc = new ArrayList<Person>();
 	
 	public static int phase = BEGINNING;
@@ -47,6 +46,7 @@ public class DrawingSurface extends PApplet {
 	
 	private PImage[] tipScreens;
 
+	Game game;
 	
 	float tx = 0, ty = 0;
 	
@@ -114,34 +114,42 @@ public class DrawingSurface extends PApplet {
 		}
 		else if (phase == PLAYING) {
 			clear();
-			if(player.x >= width*0.5f && player.x <= map.maxX()*width*0.05f-width*0.5f)
-				tx= -player.x+width*0.5f;
-			else if(player.x < width*0.5f)
+			if (game == null)
+				game = new Game();
+			game.updateGame();
+			if(game.player.x >= width*0.5f && game.player.x <= map.maxX()*width*0.05f-width*0.5f)
+				tx= -game.player.x+width*0.5f;
+			else if(game.player.x < width*0.5f)
 				tx = 0;
-			else if (player.x > map.maxX()*width*0.05f-width*0.5f)
+			else if (game.player.x > map.maxX()*width*0.05f-width*0.5f)
 				tx = -(map.maxX()*width*0.05f-width);
 			
-			if(player.y >= height*0.5f && player.y <= (map.maxY()-1)*width*0.05f-height*0.5f)
-				ty= -player.y+height*0.5f;
-			else if(player.y < height*0.5f)//ahem osman
+			if(game.player.y >= height*0.5f && game.player.y <= (map.maxY()-1)*width*0.05f-height*0.5f)
+				ty= -game.player.y+height*0.5f;
+			else if(game.player.y < height*0.5f)//ahem osman
 				ty = 0;
-			else if(player.y > (map.maxY()-1)*width*0.05f-height*0.5f)
+			else if(game.player.y > (map.maxY()-1)*width*0.05f-height*0.5f)
 				ty = -((map.maxY()-1)*width*0.05f-height);
 			
 			//translate(tx, ty);
 			map.draw(this, tx, ty, init);
 			
 			if (init) {
-				riskBar = new RiskBar(player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
-				player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
+				riskBar = new RiskBar(game.player.getRisk(), 30, 2 * height * 0.03f, 100, 20, 10);
+				game.player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 			}
 			for (Person p : npc) {
-				p.move(player.getX(), player.getY());
+				p.move(game.player.getX(), game.player.getY());
 				p.setImageIcons(this);
 				p.draw(this, tx, ty);
 			}
+			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
+				game.player.initRisk+=5;
+				System.out.println("Increasing Risk");
+			}
+			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);
-			player.draw(this, keys, tx, ty);
+			game.player.draw(this, keys, tx, ty);
 			//translate(-tx, -ty);
 		}
 		redraw();
@@ -271,13 +279,16 @@ public class DrawingSurface extends PApplet {
 			if (selected != -1) {
 				if (keyCode == 32) {
 					phase = PLAYING;
-					player = new Player(selected);
-					player.setImageIcons(this);
+					game = new Game();
+					game.setPlayer(selected);
+					game.player.setImageIcons(this);
 					
 				} else if (keyCode == 8) {
 					selected = -1;
 				}
 			}
+			
+			
 		}
 		else if (phase == PLAYING) {
 			init = false;
@@ -291,6 +302,7 @@ public class DrawingSurface extends PApplet {
 				keyCode = this.RIGHT;
 	
 			keys[keyCode] = true;
+			
 		}
 
 	}
