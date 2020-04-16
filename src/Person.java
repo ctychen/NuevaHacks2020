@@ -28,6 +28,8 @@ public class Person {
 	protected int speed, maxSpeed;
 	protected int vx, vy;
 	protected Pet pet;
+	
+	private boolean imageIconsSet = false;
 
 	public Person() {
 
@@ -77,50 +79,56 @@ public class Person {
 
 	public void setImageIcons(PApplet p) {
 		
-		frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
-		leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
-		rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
-		
-		frontStepIcons = new PImage[] { 
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
+		if (!imageIconsSet) {
+			frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
+			leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
+			rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
+			
+			frontStepIcons = new PImage[] { 
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
+				};
+			leftStepIcons = new PImage[] {
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
 			};
-		leftStepIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
-		};
-		rightStepIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
-		};
-		backStepIcons = new PImage[] {
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
-				p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
-		};
-		// default icon is front-still
-		currentIcon = frontStill;
-		System.out.print("loaded images");
-		
-		if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (leftStill != null) leftStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (rightStill != null) rightStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (backStill != null) backStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		
-		if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		
-		if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		
-		if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		
-		if (backStepIcons[0] != null) backStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
-		if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			rightStepIcons = new PImage[] {
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
+			};
+			backStepIcons = new PImage[] {
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
+					p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
+			};
+			// default icon is front-still
+			currentIcon = frontStill;
+			System.out.print("loaded images");
+			
+			if (frontStill != null) frontStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (leftStill != null) leftStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (rightStill != null) rightStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (backStill != null) backStill.resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			
+			if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			
+			if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			
+			if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			
+			if (backStepIcons[0] != null) backStepIcons[0].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f+0.5f), (int)(p.width*0.06f+0.5f));
+			
+			imageIconsSet = true;
+		}
 	}
 		
 	public void draw(PApplet p, float tx, float ty) {
 		p.pushStyle();
+		if (!imageIconsSet)
+			setImageIcons(p);
 		if (currentIcon != null)
 			p.image(currentIcon, x+tx, y+ty);
 		else

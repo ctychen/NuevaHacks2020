@@ -155,12 +155,11 @@ public class DrawingSurface extends PApplet {
 			}
 			for (Person p : npc) {
 				p.move(game.player.getX(), game.player.getY());
-				p.setImageIcons(this);
+				//p.setImageIcons(this); //BBBOOI THIS CAUSES LAG
 				p.draw(this, tx, ty);
 			}
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;
-				System.out.println("Increasing Risk");
 			}
 			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);
