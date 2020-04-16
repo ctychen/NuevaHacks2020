@@ -31,6 +31,8 @@ public class Vehicle {
 			leftIcons[i].resize((int)(g.width*0.1f+0.5f), (int)(g.width*0.12f+0.5f));
 			rightIcons[i].resize((int)(g.width*0.1f+0.5f), (int)(g.width*0.12f+0.5f));
 		}
+		loadedCars = true;
+		System.out.println("Loaded Car Images");
 	}
 	
 	//If vertical is false, then the car will be moving horizontally
