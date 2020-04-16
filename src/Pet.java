@@ -24,6 +24,8 @@ public class Pet {
 	protected Type type;
 	protected int typeID;
 	protected DrawingSurface.Direction currentMovingDirection;
+	private boolean imageIconsSet = false;
+	protected int vx, vy;
 	
 	protected enum Type {
 		CAT(1, 5, 8), DOG(2, 7, 10), TURTLE(3, 2, 3), NINETAILFOX(4, 4, 10); // Change this lol
@@ -81,13 +83,44 @@ public class Pet {
 				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "backstep1.png"),
 				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "backstep2.png")
 		};
+		
 		// default icon is right-still
 		this.currentIcon = rightStill;
+		
+		if (frontStill != null) frontStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (leftStill != null) leftStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (rightStill != null) rightStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (backStill != null) backStill.resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		
+		if (frontStepIcons[0] != null) frontStepIcons[0].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (frontStepIcons[1] != null) frontStepIcons[1].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		
+		if (leftStepIcons[0] != null) leftStepIcons[0].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (leftStepIcons[1] != null) leftStepIcons[1].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		
+		if (rightStepIcons[0] != null) rightStepIcons[0].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (rightStepIcons[1] != null) rightStepIcons[1].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		
+		if (backStepIcons[0] != null) backStepIcons[0].resize((int)(p.width*0.05f), (int)(p.width*0.06f));
+		if (backStepIcons[1] != null) backStepIcons[1].resize((int)(p.width*0.05f), (int)(p.width*0.06));
+		
+		imageIconsSet = true;
 	}
 	
-	public void draw(PApplet p) {
+//	public void draw(PApplet p) {
+//		p.pushStyle();
+//		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
+//		p.popStyle();
+//	}
+	
+	public void draw(PApplet p, float tx, float ty) {
 		p.pushStyle();
-		p.image(currentIcon, x, y, p.width*0.05f, p.width*0.06f);
+		if (!imageIconsSet)
+			setImageIcons(p);
+		if (currentIcon != null)
+			p.image(currentIcon, x+tx, y+ty);
+		else
+			p.rect(x+tx, y+ty, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
 	
@@ -119,7 +152,7 @@ public class Pet {
 	public void moveUpIcon(PApplet p, int i) {
 		
 		currentMovingDirection = DrawingSurface.Direction.UP;
-		currentIcon = backStepIcons[i%backStepIcons.length];
+		currentIcon = backStepIcons[(i/4)%backStepIcons.length];
 		y-=p.width*0.001*speed;
 
 	}
@@ -127,7 +160,7 @@ public class Pet {
 	public void moveLeftIcon(PApplet p, int i) {;
 
 		currentMovingDirection = DrawingSurface.Direction.LEFT;
-		currentIcon = leftStepIcons[i%leftStepIcons.length];
+		currentIcon = leftStepIcons[(i/4)%leftStepIcons.length];
 		x-=p.width*0.001*speed;
 		
 	}
@@ -135,7 +168,7 @@ public class Pet {
 	public void moveRightIcon(PApplet p, int i) {
 
 		currentMovingDirection = DrawingSurface.Direction.RIGHT;
-		currentIcon = rightStepIcons[i%rightStepIcons.length];
+		currentIcon = rightStepIcons[(i/4)%rightStepIcons.length];
 		x+=p.width*0.001*speed;
 		
 	}
@@ -143,10 +176,24 @@ public class Pet {
 	public void moveDownIcon(PApplet p, int i) {
 
 		currentMovingDirection = DrawingSurface.Direction.DOWN;
-		currentIcon = frontStepIcons[i%frontStepIcons.length];
+		currentIcon = frontStepIcons[(i/4)%frontStepIcons.length];
 		y+=p.width*0.001*speed;
 		
 	}
+	
+	public void move(int px, int py) {
+		px = (int)(Math.random()*200-100);
+		py = (int)(Math.random()*200-100);
+		float temp = (float)Math.sqrt( (px)*(px) + (py)*(py) );
+		if (Math.random() < 0.5) {
+			vx = (int)(speed*(px)/temp);
+		} else {
+			vy = (int)(speed*(py)/temp);
+		}
+		x+=vx;
+		y+=vy;	
+	}
+	
 	
 	public int getX() {
 		return this.x;

@@ -9,7 +9,6 @@ public class Game {
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist;
 
-	
 	public Game() {
 		
 	}
