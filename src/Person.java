@@ -231,6 +231,12 @@ public class Person {
 		y+=vy;	
 	}
 	
+	public double getDistanceFrom(Person other) {
+		int x2 = other.getX();
+		int y2 = other.getY();
+		return Math.sqrt((this.x - x2) * (this.x - x2) + (this.y - y2) * (this.y - y2));
+	}
+	
 	public int getX() {
 		return this.x;
 	}

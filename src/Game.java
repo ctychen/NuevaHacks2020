@@ -84,17 +84,18 @@ public class Game {
 			for(int i=0;i<plist.size();i++)
 			{
 				Person p = plist.get(i);
-				double distance=(Math.sqrt(Math.pow(player.x-p.x, 2) + Math.pow(player.y-p.y, 2)));
+				double distance= player.getDistanceFrom(p);
 				
-				if(distance<DrawingSurface.DEFAULT_WIDTH*2) {
-					addedrisk+=(DrawingSurface.DEFAULT_WIDTH*2-distance)*(DrawingSurface.DEFAULT_WIDTH*2-distance)/160;
+				if(distance < DrawingSurface.safeDistance) {
+					addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/500;
 					list.add(i);
-					//System.out.println("Added " + addedrisk);
+					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
 				}
 			}
 		}
 		list.set(0, addedrisk);
+		System.out.println("Risk is " + player.getRisk());
 		return list;
 	}
 	

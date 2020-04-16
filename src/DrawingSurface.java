@@ -48,6 +48,7 @@ public class DrawingSurface extends PApplet {
 												// keycode is true, when it is released it gets set to false
 	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
+	public static final int LOADING = 2;
 	
 	public static int phase = BEGINNING;
 	
@@ -61,6 +62,8 @@ public class DrawingSurface extends PApplet {
 	Game game;
 	
 	float tx = 0, ty = 0;
+	
+	protected static double safeDistance;
 	
 	Clock fancyClock = Clock.systemDefaultZone();
 	
@@ -174,12 +177,14 @@ public class DrawingSurface extends PApplet {
 			}
 			for (Person p : game.plist) {
 				p.move(game.player.getX(), game.player.getY());
-				//p.setImageIcons(this); //BBBOOI THIS CAUSES LAG
 				p.draw(this, tx, ty);
 			}
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;
 			}
+			
+			safeDistance = this.width*0.06f+0.5f;
+			
 			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);
 			game.player.draw(this, keys, tx, ty);
@@ -357,19 +362,30 @@ public class DrawingSurface extends PApplet {
 				displayAbout();
 			}
 			if (selected != -1) {
-				if (keyCode == 32) {
-					phase = PLAYING;
-					game = new Game();
-					game.setPlayer(selected);
-					game.player.setImageIcons(this);
+				if (keyCode == 32) { // Draws the loading screens with spicy spicy tips
+					//phase = PLAYING;
+					phase = LOADING;
+					showTipScreen();
+//					game = new Game();
+//					game.setPlayer(selected);
+//					game.player.setImageIcons(this);
 					
 				} else if (keyCode == 8) {
 					selected = -1;
 				}
 			}
 			
-			
 		}
+		else if (phase == LOADING) {
+			if (keyCode == 32) {
+				phase = PLAYING;
+				game = new Game();
+				game.setPlayer(selected);
+				game.player.setImageIcons(this);
+				
+			}
+		}
+		
 		else if (phase == PLAYING) {
 			init = false;
 			if (keyCode == 87) // This little chain of if-else statements is so that you can use either arrow keys or WASD
