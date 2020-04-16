@@ -13,9 +13,11 @@ public class Game {
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist; // cars
 	protected static int numPoints;
+	private int countdown;
 	
 	public Game() {
 		numPoints=0;
+		countdown=3600;
 	}
 	
 	public void setNPCsInfected() {
@@ -144,12 +146,18 @@ public class Game {
 	
 	public void updateGameStatus() {
 		if(player.isInfected) {
-			
+			if(Math.random()*15==10)
+			{
+				numPoints++;
+			}
+			countdown--;
 		}
 		else
 		{
 			if(Math.random()*10==10)
-			numPoints++;
+			{
+				numPoints++;
+			}
 		}
 		System.out.println(numPoints);
 	}

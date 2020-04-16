@@ -28,7 +28,7 @@ public class Person {
 	protected int speed, maxSpeed;
 	protected int vx, vy;
 	protected Pet pet;
-	
+	protected boolean gotHit = false;
 	private boolean imageIconsSet = false;
 
 	public Person() {
@@ -172,6 +172,8 @@ public class Person {
 		}
 	}
 
+	// TODO: after a period passes since infection, person's movement gradually slows
+	
 	public void moveUpIcon(PApplet p, int i) {
 		
 		currentMovingDirection = DrawingSurface.Direction.UP;
@@ -251,6 +253,14 @@ public class Person {
 	
 	public void changeRisk(int amount) {
 		this.risk += amount;
+	}
+	
+	public void gotHit(boolean hit) {
+		this.gotHit = hit;
+	}
+	
+	public boolean getHit() {
+		return this.gotHit;
 	}
 	
 	public PImage getCurrentIcon() {
