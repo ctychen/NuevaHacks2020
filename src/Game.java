@@ -35,11 +35,10 @@ public class Game {
 		ArrayList<Integer> risklist = riskCalc();
 		if (player.risk < player.initRisk)
 			player.risk = player.initRisk;
-		player.risk=player.risk+risklist.get(0);
+		player.risk=player.initRisk+risklist.get(0);
 		if(player.risk>100) {
 			player.risk=100;
 		}
-		//update risk bar here
 		for(int i=1;i<risklist.size();i++)
 		{
 			if(!player.isInfected)
