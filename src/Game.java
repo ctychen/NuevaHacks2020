@@ -16,6 +16,8 @@ public class Game {
 	
 	public void setPlayer(int p) {
 		player = new Player(p);
+		plist = new ArrayList<Person>();
+		vlist = new ArrayList<Vehicle>();
 	}
 	
 	public void updateGame() {
