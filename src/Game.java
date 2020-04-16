@@ -51,22 +51,22 @@ public class Game {
 	
 	public void spawnCars(Map map, PApplet g, float tx, float ty) {
 		for (Point2D.Float e : map.getCarUpStartingLocs()) {
-			if (Math.random() < 0.04 && e.x+tx > 0 && e.x+tx < g.width) {
+			if (Math.random() < 0.04 && e.x+tx > 0-g.width/2 && e.x+tx < 1.5f*g.width) {
 				vlist.add(new Vehicle(true, true, (int)e.x, (int)e.y));
 			}
 		}
 		for (Point2D.Float e : map.getCarDownStartingLocs()) {
-			if (Math.random() < 0.04 && e.x+tx > 0 && e.x+tx < g.width) {
+			if (Math.random() < 0.04 && e.x+tx > 0-g.width/2 && e.x+tx < 1.5f*g.width) {
 				vlist.add(new Vehicle(true, false, (int)e.x, (int)e.y));
 			}
 		}
 		for (Point2D.Float e : map.getCarLeftStartingLocs()) {
-			if (Math.random() < 0.04 && e.y+ty > 0 && e.y+ty < g.height) {
+			if (Math.random() < 0.04 && e.y+ty > 0-g.height/2 && e.y+ty < 1.5f*g.height) {
 				vlist.add(new Vehicle(false, false, (int)e.x, (int)(e.y-g.width*0.04f)));
 			}
 		}
 		for (Point2D.Float e : map.getCarRightStartingLocs()) {
-			if (Math.random() < 0.04 && e.y+ty > 0 && e.y+ty < g.height) {
+			if (Math.random() < 0.04 && e.y+ty > 0-g.height/2 && e.y+ty < 1.5f*g.height) {
 				vlist.add(new Vehicle(false, true, (int)e.x, (int)(e.y-g.width*0.04f)));
 			}
 		}
