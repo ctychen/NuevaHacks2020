@@ -46,13 +46,7 @@ public class Game {
 	//updates risk based on movement and does a check for infection
 	public void updateRisk() {
 		ArrayList<Integer> risklist = riskCalc();
-<<<<<<< HEAD
-		player.risk=player.initRisk+risklist.get(0);
-=======
-		if (player.risk < player.initRisk)
-			player.risk = player.initRisk;
 		player.risk=player.initRisk+ (int)(0.5*(player.risk - player.initRisk)) + risklist.get(0);
->>>>>>> branch 'master' of https://github.com/ctychen/NuevaHacks2020
 		if(player.risk>100) {
 			player.risk=100;
 		}
