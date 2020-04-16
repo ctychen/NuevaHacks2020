@@ -188,7 +188,7 @@ public class DrawingSurface extends PApplet {
 				game.player.initRisk+=5;
 			}
 			
-			safeDistance = this.width*0.12f+0.5f;
+			safeDistance = this.width*0.08f+0.5f;
 			
 			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);

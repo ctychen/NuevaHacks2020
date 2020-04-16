@@ -8,9 +8,10 @@ public class Game {
 	protected int numInfected;
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist;
+	protected static int numPoints;
 
 	public Game() {
-		
+		numPoints=0;
 	}
 	
 	public void setNPCsInfected() {
@@ -36,6 +37,7 @@ public class Game {
 		//recalculate risk and update player/npc infection status if necessary
 		//update score
 		//check game state
+		updateGameStatus();
 		updateRisk();
 		
 	}
@@ -43,8 +45,6 @@ public class Game {
 	//updates risk based on movement and does a check for infection
 	public void updateRisk() {
 		ArrayList<Integer> risklist = riskCalc();
-		if (player.risk < player.initRisk)
-			player.risk = player.initRisk;
 		player.risk=player.initRisk+ (int)(0.5*(player.risk - player.initRisk)) + risklist.get(0);
 		if(player.risk>100) {
 			player.risk=100;
@@ -96,13 +96,13 @@ public class Game {
 				double distance= player.getDistanceFrom(p);
 				
 				if(distance < DrawingSurface.safeDistance) {
+					addedrisk+=(DrawingSurface.safeDistance-0.9*distance)*(DrawingSurface.safeDistance-0.9*distance)/80;
 					if (!p.isInfected) {
 						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/7000;
 					} else {
 						// Coronavirus is hella infectious, so if they're infected, your risk goes up way faster
 						addedrisk+=(DrawingSurface.safeDistance)*(DrawingSurface.safeDistance)/3000;
 					}
-
 					list.add(i);
 					System.out.println("Added " + addedrisk);
 					DrawingSurface.playSound = "scream.wav";
@@ -114,6 +114,16 @@ public class Game {
 		return list;
 	}
 	
-	
+	public void updateGameStatus() {
+		if(player.isInfected) {
+			
+		}
+		else
+		{
+			if(Math.random()*10==10)
+			numPoints++;
+		}
+		System.out.println(numPoints);
+	}
 	
 }
