@@ -124,7 +124,7 @@ public class Person {
 		if (currentIcon != null)
 			p.image(currentIcon, x+tx, y+ty);
 		else
-			p.rect(x-tx, y-ty, p.width*0.05f, p.width*0.06f);
+			p.rect(x+tx, y+ty, p.width*0.05f, p.width*0.06f);
 		p.popStyle();
 	}
 	
