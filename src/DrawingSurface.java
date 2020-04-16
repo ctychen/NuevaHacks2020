@@ -50,6 +50,7 @@ public class DrawingSurface extends PApplet {
 	public static final int BEGINNING = 0;
 	public static final int PLAYING = 1;
 	public static final int LOADING = 2;
+	public static final int DEAD = 3;
 	
 	public static int phase = BEGINNING;
 	
@@ -155,7 +156,7 @@ public class DrawingSurface extends PApplet {
 			
 			if (game == null)
 				game = new Game();
-			game.updateGame();
+			game.updateGame(map, this, tx, ty);
 			if(game.player.x >= width*0.5f && game.player.x <= map.maxX()*width*0.05f-width*0.5f)
 				tx= -game.player.x+width*0.5f;
 			else if(game.player.x < width*0.5f)
@@ -189,6 +190,17 @@ public class DrawingSurface extends PApplet {
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;
 			}
+			for (int i = 0; i < game.vlist.size(); i++) {
+				game.vlist.get(i).draw(this, (int)tx, (int)ty, map.maxX(), map.maxY());
+				if (game.vlist.get(i).delete) {
+					game.vlist.remove(i);
+					i--;
+				} else if (game.vlist.get(i).collide(game.player, this)) {
+					System.out.println("You just got run over!");
+					phase = DEAD;
+				}
+					
+			}
 			
 			safeDistance = this.width*0.08f+0.5f;
 			
@@ -196,6 +208,8 @@ public class DrawingSurface extends PApplet {
 			riskBar.draw(this);
 			game.player.draw(this, keys, tx, ty);
 			//translate(-tx, -ty);
+		} else if (phase == DEAD) {
+			g.text("HA YOU'RE DEAD!!!! JOKES ON YOU!!!", width/2, height/2);
 		}
 		redraw();
 	}

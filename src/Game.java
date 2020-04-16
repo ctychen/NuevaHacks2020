@@ -1,4 +1,8 @@
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import processing.core.PApplet;
+
 
 public class Game {
 	
@@ -7,9 +11,9 @@ public class Game {
 	public Player player;
 	protected int numInfected;
 	protected static ArrayList<Person> plist; // NPCs
-	protected static ArrayList<Vehicle> vlist;
+	protected static ArrayList<Vehicle> vlist; // cars
 	protected static int numPoints;
-
+	
 	public Game() {
 		numPoints=0;
 	}
@@ -31,7 +35,7 @@ public class Game {
 		vlist = new ArrayList<Vehicle>();
 	}
 	
-	public void updateGame() {
+	public void updateGame(Map map, PApplet g, float tx, float ty) {
 		//calls methods to:
 		//move NPCs, cars, and pets
 		//recalculate risk and update player/npc infection status if necessary
@@ -39,7 +43,21 @@ public class Game {
 		//check game state
 		updateGameStatus();
 		updateRisk();
-		
+		if (Math.random() < 0.02 && vlist.size() < 50)
+			spawnCars(map, g, tx, ty);
+	}
+	
+	public void spawnCars(Map map, PApplet g, float tx, float ty) {
+		for (Point2D.Float e : map.getCarUpStartingLocs()) {
+			if (Math.random() < 0.04 && e.x+tx > 0 && e.x+tx < g.width) {
+				vlist.add(new Vehicle(true, true, (int)e.x, (int)e.y));
+			}
+		}
+		for (Point2D.Float e : map.getCarDownStartingLocs()) {
+			if (Math.random() < 0.04 && e.x+tx > 0 && e.x+tx < g.width) {
+				vlist.add(new Vehicle(true, false, (int)e.x, (int)e.y));
+			}
+		}
 	}
 	
 	//updates risk based on movement and does a check for infection
