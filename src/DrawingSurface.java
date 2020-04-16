@@ -303,8 +303,8 @@ public class DrawingSurface extends PApplet {
 				(game.player.getHit() ? "Oh no, you got hit by a car, it's over!" : 
 					"Unfortunately, you got infected, and now symptoms are kicking in! You have to stop.") + 
 				"\n Here are your stats:" +
-				"\n Your total points: " + game.numPoints + 
 				"\n You infected " + game.numInfected + " other people." + 
+				"\n Your total points: " + game.numPoints + " - 1000*" + game.numInfected + "people infected = " + (game.numPoints-1000*game.numInfected) +
 				"\n This is why socially distancing is important!"
 				);
 		dialog = pane.createDialog(frame, "Game Over");
