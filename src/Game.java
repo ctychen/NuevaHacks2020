@@ -20,6 +20,8 @@ public class Game {
 		//recalculate risk and update player/npc infection status if necessary
 		//update score
 		//check game state
+		updateRisk();
+		
 	}
 	
 	//updates risk based on movement and does a check for infection
