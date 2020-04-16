@@ -153,7 +153,7 @@ public class DrawingSurface extends PApplet {
 			
 			if (game == null)
 				game = new Game();
-			game.updateGame();
+			game.updateGame(map);
 			if(game.player.x >= width*0.5f && game.player.x <= map.maxX()*width*0.05f-width*0.5f)
 				tx= -game.player.x+width*0.5f;
 			else if(game.player.x < width*0.5f)
@@ -182,6 +182,8 @@ public class DrawingSurface extends PApplet {
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;
 			}
+			for (Vehicle v : game.vlist)
+				v.draw(this, (int)tx, (int)ty);
 			
 			safeDistance = this.width*0.12f+0.5f;
 			
