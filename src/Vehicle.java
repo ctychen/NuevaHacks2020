@@ -47,8 +47,8 @@ public class Vehicle {
 	public void draw(PApplet g, int tx, int ty, int mx, int my) {
 		if (!loadedCars)
 			loadCars(g);
-		if (Math.random() < 0.01f)
-			swerve = (int)(Math.random()*3-1);
+		if (Math.random() < 0.06f)
+			swerve = (int)(Math.random()*3)-1;
 		else if (Math.random() < 0.3f)
 			swerve = 0;
 		if (vertical) {
@@ -81,8 +81,8 @@ public class Vehicle {
 		
 		if (distance < g.width*0.04f)
 			return true;
-		else if (distance < g.width*0.2f && Math.random() < 0.6f)
-			swerve = (int)(Math.random()*3-1);
+		else if (distance < g.width*0.2f && Math.random() < 0.8f)
+			swerve = (int)(Math.random()*3)-1;
 		
 		return false;
 	}
