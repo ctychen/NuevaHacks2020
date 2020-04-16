@@ -37,7 +37,6 @@ public class Game {
 		if(player.risk>100) {
 			player.risk=100;
 		}
-		//update risk bar here
 		for(int i=1;i<risklist.size();i++)
 		{
 			if(!player.isInfected)
