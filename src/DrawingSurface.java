@@ -192,8 +192,8 @@ public class DrawingSurface extends PApplet {
 				}
 			}
 			for (Person p : game.plist) {
-				p.move(game.player.getX(), game.player.getY());
 				p.draw(this, tx, ty);
+				p.move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY());
 			}
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;

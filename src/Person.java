@@ -30,6 +30,9 @@ public class Person {
 	protected Pet pet;
 	protected boolean gotHit = false;
 	private boolean imageIconsSet = false;
+	
+	private int fancyCounter = 0;
+	private int direction = 0;
 
 	public Person() {
 
@@ -71,6 +74,7 @@ public class Person {
 		risk = initRisk;
 		this.x = xi;
 		this.y = yi;
+		direction = (int)(Math.random()*5);
 	}
 
 	public void addPet(Pet.Type type) {
@@ -220,8 +224,8 @@ public class Person {
 		}
 	}
 	
-	public void move(int px, int py) {
-		px = (int)(Math.random()*200-100);
+	public void move(int px, int py, PApplet g, int mx, int my) {
+		/*px = (int)(Math.random()*200-100);
 		py = (int)(Math.random()*200-100);
 		float temp = (float)Math.sqrt( (px)*(px) + (py)*(py) );
 		if (Math.random() < 0.5) {
@@ -230,7 +234,41 @@ public class Person {
 			vy = (int)(speed*(py)/temp);
 		}
 		x+=vx;
-		y+=vy;	
+		y+=vy;	*/
+		
+		if (Math.random() < 0.1)
+			direction = (int)(Math.random()*5);
+		
+		fancyCounter++;
+		fancyCounter%=16;
+		
+		if (x < 0)
+			direction = 3;
+		else if (x > mx*g.width*0.05f)
+			direction = 2;
+		
+		if (y < 0)
+			direction = 4;
+		else if (y > my*g.width*0.05f)
+			direction = 1;
+			
+		switch (direction) {
+			case 0:
+				standStillIcon(g);
+				break;
+			case 1:
+				moveUpIcon(g, fancyCounter);
+				break;
+			case 2:
+				moveLeftIcon(g, fancyCounter);
+				break;
+			case 3:
+				moveRightIcon(g, fancyCounter);
+				break;
+			case 4:
+				moveDownIcon(g, fancyCounter);
+				break;
+		}
 	}
 	
 	public double getDistanceFrom(Person other) {
