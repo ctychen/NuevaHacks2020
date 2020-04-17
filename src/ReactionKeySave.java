@@ -24,7 +24,7 @@ public class ReactionKeySave {
 		g.rect(g.width*0.4f, g.height*0.4f, g.width*0.2f, g.height*0.2f);
 		g.fill(0);
 		if ((keys[keyCodes[key]] || saved == 1) && saved != -1) { //saved
-			g.text("NICE SAVE", g.width*0.45f, g.height*0.45f);
+			g.text("NICE SAVE", g.width*0.6f, g.height*0.45f);
 			saved = 1;
 			
 		} else if ((time > maxTime || saved == -1) && saved != 1) {

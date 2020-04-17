@@ -343,7 +343,7 @@ public class DrawingSurface extends PApplet {
 				"\n Here are your stats:" +
 				"\n You infected " + game.numInfected + " other people." + 
 				"\n Total points: " + game.numPoints + " - 5000*" + game.petDeaths + " pets killed" + " - 1000*" + game.numInfected + " people infected = " + (game.numPoints-5000*game.petDeaths-1000*game.numInfected) +
-				"\n This is why socially distancing is important!"
+				(game.numInfected != 0 ? "\n This is why socially distancing is important!" : " ")
 				);
 		dialog = pane.createDialog(frame, "Game Over");
 		dialog.setLocation((int)(width/4),(int)(height/2));
