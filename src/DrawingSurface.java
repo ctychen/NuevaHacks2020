@@ -243,7 +243,10 @@ public class DrawingSurface extends PApplet {
 			
 			//translate(-tx, -ty);
 		} else if (phase == DEAD) {
-			g.text("HA YOU'RE DEAD!!!! JOKES ON YOU!!!", width/2, height/2);
+			g.fill((float)Math.random()*255, (float)Math.random()*255, (float)Math.random()*255);
+			g.rect(g.width*0.25f, g.height*0.4f, g.width*0.5f, g.height*0.2f);
+			g.fill(0);
+			g.text("Unfortunately, you died. \n Press R to play again!", width/2, height/2);
 			if (!displayStats) {
 				displayStats();
 			}
@@ -343,7 +346,9 @@ public class DrawingSurface extends PApplet {
 				"\n Here are your stats:" +
 				"\n You infected " + game.numInfected + " other people." + 
 				"\n Total points: " + game.numPoints + " - 5000*" + game.petDeaths + " pets killed" + " - 1000*" + game.numInfected + " people infected = " + (game.numPoints-5000*game.petDeaths-1000*game.numInfected) +
-				(game.numInfected != 0 ? "\n This is why socially distancing is important!" : " ")
+				(game.numInfected != 0 ? ("\nThis is why socially distancing is important!" + 
+						"\nBe sure to stay at least 6 feet away from others, \nreact fast to cover a cough, \nand don't touch your face!")
+						: " ")
 				);
 		dialog = pane.createDialog(frame, "Game Over");
 		dialog.setLocation((int)(width/4),(int)(height/2));
@@ -355,33 +360,33 @@ public class DrawingSurface extends PApplet {
 	}
 	
 	
-	public void instinctKeySave() {
-		String instinct = instincts[(int)(Math.random() * instincts.length)];
-		pane = new JOptionPane(instinct + "\nPress the key " + toPress + " as fast as possible to see if you were able to make the right choice...");
-		long startTime = System.currentTimeMillis();
-		long timePassed;
-		
-		// Random letter key for you to press
-		Random r = new Random();
-		toPress = (char)(r.nextInt(26) + 'a');
-		
-		dialog = pane.createDialog(frame, "Quick! Make a Save!");
-		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
-		dialog.setVisible(true);
-		
-		if (saveAttempted) {
-			timePassed = endTime - startTime;
-			if (timePassed <= (80 + (int)(Math.random() * 200))) { // that's our time limit, may wanna change it
-				JOptionPane yeet = new JOptionPane("You were able to make the right decision, you're fine!");
-				JDialog spookyDialog = yeet.createDialog(frame, "");
-				spookyDialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
-				spookyDialog.setVisible(true);
-			}	else {
-				
-			}
-		}
-		
-	}
+//	public void instinctKeySave() {
+//		String instinct = instincts[(int)(Math.random() * instincts.length)];
+//		pane = new JOptionPane(instinct + "\nPress the key " + toPress + " as fast as possible to see if you were able to make the right choice...");
+//		long startTime = System.currentTimeMillis();
+//		long timePassed;
+//		
+//		// Random letter key for you to press
+//		Random r = new Random();
+//		toPress = (char)(r.nextInt(26) + 'a');
+//		
+//		dialog = pane.createDialog(frame, "Quick! Make a Save!");
+//		dialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+//		dialog.setVisible(true);
+//		
+//		if (saveAttempted) {
+//			timePassed = endTime - startTime;
+//			if (timePassed <= (80 + (int)(Math.random() * 200))) { // that's our time limit, may wanna change it
+//				JOptionPane yeet = new JOptionPane("You were able to make the right decision, you're fine!");
+//				JDialog spookyDialog = yeet.createDialog(frame, "");
+//				spookyDialog.setLocation((int)(Math.random()*width),(int)(Math.random()*height));
+//				spookyDialog.setVisible(true);
+//			}	else {
+//				
+//			}
+//		}
+//		
+//	}
 	
 	public void instinctClickSave() {
 		String instinct = instincts[(int)(Math.random() * instincts.length)];
@@ -504,6 +509,11 @@ public class DrawingSurface extends PApplet {
 			
 		}
 
+		else if (phase == DEAD) {
+			if (keyCode == 82) { // R
+				phase = BEGINNING;
+			}
+		}
 	}
 
 	public void keyTyped(KeyEvent k) {
