@@ -235,6 +235,8 @@ public class Pet {
 					if (dy > 0) direction = 1;
 					else direction = 4;
 				}
+				if (Math.random() < 0.2f)
+					Game.increasePoints(1);
 			} else {
 				direction = 0;
 			}

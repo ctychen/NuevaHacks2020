@@ -22,7 +22,9 @@ public class Game {
 		countdown=3600;
 	}
 	
-	
+	public static void increasePoints(int amount) {
+		numPoints+=amount;
+	}
 	
 	public void setNPCsInfected() {
 		for (int i = 0; i < plist.size(); i++) {
