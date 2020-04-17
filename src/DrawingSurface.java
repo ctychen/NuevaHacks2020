@@ -66,6 +66,8 @@ public class DrawingSurface extends PApplet {
 	private PImage[] picChar = new PImage[NUMBER_OF_PLAYABLE_CHARACTERS*2];
 	
 	private PImage[] tipScreens;
+	
+	private ArrayList<ReactionKeySave> thinkFast = new ArrayList<ReactionKeySave>();
 
 	Game game;
 	
@@ -225,6 +227,20 @@ public class DrawingSurface extends PApplet {
 			riskBar.set(game.player.getRisk());
 			riskBar.draw(this);
 			game.player.draw(this, keys, tx, ty);
+			
+			if (Math.random()<0.001f && thinkFast.size() < 1) //Reaction-based key saves
+				thinkFast.add(new ReactionKeySave());
+			
+			for (int i = 0; i < thinkFast.size(); i++) {
+				thinkFast.get(i).draw(this, keys);
+				if (thinkFast.get(i).time > thinkFast.get(i).maxTime*2) {
+					if (thinkFast.get(i).saved == -1)
+						game.changeInitRisk(5+(int)(Math.random()*10));
+					thinkFast.remove(i);
+					i--;
+				}
+			}
+			
 			//translate(-tx, -ty);
 		} else if (phase == DEAD) {
 			g.text("HA YOU'RE DEAD!!!! JOKES ON YOU!!!", width/2, height/2);
@@ -233,7 +249,12 @@ public class DrawingSurface extends PApplet {
 			}
 
 		}
+		
+		
 		redraw();
+		
+		
+			
 	}
 	
 	public void showTipScreen() {
