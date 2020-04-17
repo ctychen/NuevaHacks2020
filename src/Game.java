@@ -15,6 +15,7 @@ public class Game {
 	protected static ArrayList<Pet> alist; // pets
 	protected static int numPoints;
 	private int countdown;
+	int petDeaths = 0;
 	
 	public Game() {
 		numPoints=0;

@@ -196,13 +196,17 @@ public class DrawingSurface extends PApplet {
 				p.draw(this, tx, ty);
 				p.move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY());
 			}
-			for (Pet p : game.alist) {
-				p.draw(this, tx, ty);
-				p.move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY(), tx, ty, keys[76]);
+			for (int i = 0; i < game.alist.size(); i++) {
+				game.alist.get(i).draw(this, tx, ty);
+				game.alist.get(i).move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY(), tx, ty, keys[76]);
+				if (game.alist.get(i).dead) {
+					game.petDeaths++;
+					game.alist.remove(i);
+				}
 			}
-			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
-				game.player.initRisk+=5;
-			}
+			//if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
+			//	game.player.initRisk+=5;
+			//}
 			for (int i = 0; i < game.vlist.size(); i++) {
 				game.vlist.get(i).draw(this, (int)tx, (int)ty, map.maxX(), map.maxY());
 				if (game.vlist.get(i).delete) {
@@ -317,7 +321,7 @@ public class DrawingSurface extends PApplet {
 					"Unfortunately, you got infected, and now symptoms are kicking in! You have to stop.") + 
 				"\n Here are your stats:" +
 				"\n You infected " + game.numInfected + " other people." + 
-				"\n Total points: " + game.numPoints + " - 1000*" + game.numInfected + " people infected = " + (game.numPoints-1000*game.numInfected) +
+				"\n Total points: " + game.numPoints + " - 1000*" + game.petDeaths + " pets killed" + " - 1000*" + game.numInfected + " people infected = " + (game.numPoints-1000*game.petDeaths-1000*game.numInfected) +
 				"\n This is why socially distancing is important!"
 				);
 		dialog = pane.createDialog(frame, "Game Over");
