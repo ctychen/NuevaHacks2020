@@ -310,6 +310,10 @@ public class Map {
 		return this.npcSpawnPoints;
 	}
 	
+	public ArrayList<Point2D.Float> getPetStartingLocs() {
+		return this.petSpawnPoints;
+	}
+	
 	public ArrayList<Point2D.Float> getCarUpStartingLocs() {
 		return this.carUpSpawnPoints;
 	}

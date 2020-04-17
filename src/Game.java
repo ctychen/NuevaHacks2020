@@ -21,6 +21,8 @@ public class Game {
 		countdown=3600;
 	}
 	
+	
+	
 	public void setNPCsInfected() {
 		for (int i = 0; i < plist.size(); i++) {
 			Person p = plist.get(i);
@@ -36,6 +38,7 @@ public class Game {
 		player = new Player(p);
 		plist = new ArrayList<Person>();
 		vlist = new ArrayList<Vehicle>();
+		alist = new ArrayList<Pet>();
 	}
 	
 	public void updateGame(Map map, PApplet g, float tx, float ty) {
@@ -48,6 +51,14 @@ public class Game {
 		updateRisk();
 		if (Math.random() < 0.02 && vlist.size() < 50)
 			spawnCars(map, g, tx, ty);
+	}
+	
+	public void spawnPets(Map map, PApplet g, float tx, float ty) {
+		for (Point2D.Float e : map.getPetStartingLocs()) {
+			//if (Math.random() < 0.04 && e.x+tx > 0-g.width/2 && e.x+tx < 1.5f*g.width) {
+				alist.add(new Pet((int)e.x, (int)e.y));
+			//}
+		}
 	}
 	
 	public void spawnCars(Map map, PApplet g, float tx, float ty) {

@@ -186,6 +186,7 @@ public class DrawingSurface extends PApplet {
 				riskBar = new RiskBar(game.player.getRisk(), width*0.01f, 2 * height * 0.03f, width*0.015f, height*0.04f, 10, true);
 				game.player.setPosition((int)(map.getPlayerStart().getX()), (int)(map.getPlayerStart().getY()));
 				game.setNPCsInfected();
+				game.spawnPets(map, this, tx, ty);
 				System.out.println("NPCs infected: ");
 				for (Person p : game.plist) {
 					System.out.println(p.isInfected);
@@ -194,6 +195,10 @@ public class DrawingSurface extends PApplet {
 			for (Person p : game.plist) {
 				p.draw(this, tx, ty);
 				p.move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY());
+			}
+			for (Pet p : game.alist) {
+				p.draw(this, tx, ty);
+				p.move(game.player.getX(), game.player.getY(), this, map.maxX(), map.maxY(), tx, ty, keys[76]);
 			}
 			if (keys[17]) { // DEBUGGING PURPOSES ONLY!!!
 				game.player.initRisk+=5;

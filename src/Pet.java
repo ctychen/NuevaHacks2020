@@ -27,9 +27,15 @@ public class Pet {
 	private boolean imageIconsSet = false;
 	protected int vx, vy;
 	boolean leashed = false;
+	boolean dead = false;
+	
+	private int direction = 0;
+	private int fancyCounter = 0;
+	
+	final int numPets = 2;
 	
 	protected enum Type {
-		CAT(1, 5, 8), DOG(2, 7, 10), TURTLE(3, 2, 3), NINETAILFOX(4, 4, 10); // Change this lol
+		CAT(1, 5, 8), DOG(3, 7, 10), TURTLE(2, 2, 3), NINETAILFOX(4, 4, 10); // Change this lol
 		
 		int id, speed, maxSpeed;
 		
@@ -51,6 +57,23 @@ public class Pet {
 			return id;
 		}
 		
+	}
+	
+	public Pet(int x, int y) {
+		switch ((int)(Math.random()*numPets)) {
+			case 0:
+				this.type = Type.CAT;
+				break;
+			case 1:
+				this.type = Type.TURTLE;
+				break;
+		}
+		this.typeID = type.getID();
+		this.speed = type.getSpeed();
+		this.maxSpeed = type.getMaxSpeed();
+		this.currentMovingDirection = DrawingSurface.Direction.RIGHT; // default
+		this.x = x;
+		this.y = y;
 	}
 	
 	public Pet(Type type) {
@@ -182,8 +205,8 @@ public class Pet {
 		
 	}
 	
-	public void move(int px, int py) {
-		px = (int)(Math.random()*200-100);
+	public void move(int px, int py, PApplet g, int mx, int my, float tx, float ty, boolean lKey) {
+		/*px = (int)(Math.random()*200-100);
 		py = (int)(Math.random()*200-100);
 		float temp = (float)Math.sqrt( (px)*(px) + (py)*(py) );
 		if (Math.random() < 0.5) {
@@ -192,7 +215,69 @@ public class Pet {
 			vy = (int)(speed*(py)/temp);
 		}
 		x+=vx;
-		y+=vy;	
+		y+=vy;	*/
+		fancyCounter++;
+		fancyCounter%=16;
+		int dx = x - px;
+		int dy = y - py;
+		double d = Math.sqrt(dx*dx + dy*dy);
+		
+		if (leashed) {
+			
+			
+			if (d > g.width*0.1f) {
+				if (d > g.width*0.2f) // dont kill your pet, lol
+					dead = true;
+				if (Math.abs(dx) > Math.abs(dy)) {
+					if (dx > 0) direction = 2;
+					else direction = 3;
+				} else {
+					if (dy > 0) direction = 1;
+					else direction = 4;
+				}
+			} else {
+				direction = 0;
+			}
+			g.line(x+tx+g.width*0.02f, y+ty+g.width*0.04f, px+tx+g.width*0.02f, py+ty+g.width*0.02f);
+			
+		} else {
+			if (d < g.width*0.05f) {
+				System.out.println("yeet");
+				g.text("Press L to leash", x+tx, y+ty);
+				if (lKey)
+					leashed = true;
+			}
+			if (Math.random() < 0.1)
+				direction = (int)(Math.random()*5);
+			if (x < 0)
+				direction = 3;
+			else if (x > mx*g.width*0.05f)
+				direction = 2;
+			
+			if (y < 0)
+				direction = 4;
+			else if (y > my*g.width*0.05f)
+				direction = 1;
+		}
+		
+		switch (direction) {
+			case 0:
+				standStillIcon(g);
+				break;
+			case 1:
+				moveUpIcon(g, fancyCounter);
+				break;
+			case 2:
+				moveLeftIcon(g, fancyCounter);
+				break;
+			case 3:
+				moveRightIcon(g, fancyCounter);
+				break;
+			case 4:
+				moveDownIcon(g, fancyCounter);
+				break;
+		}
+		
 	}
 	
 	
