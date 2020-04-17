@@ -12,6 +12,7 @@ public class Game {
 	protected int numInfected;
 	protected static ArrayList<Person> plist; // NPCs
 	protected static ArrayList<Vehicle> vlist; // cars
+	protected static ArrayList<Pet> alist; // pets
 	protected static int numPoints;
 	private int countdown;
 	

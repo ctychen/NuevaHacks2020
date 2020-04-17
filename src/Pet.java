@@ -26,6 +26,7 @@ public class Pet {
 	protected DrawingSurface.Direction currentMovingDirection;
 	private boolean imageIconsSet = false;
 	protected int vx, vy;
+	boolean leashed = false;
 	
 	protected enum Type {
 		CAT(1, 5, 8), DOG(2, 7, 10), TURTLE(3, 2, 3), NINETAILFOX(4, 4, 10); // Change this lol

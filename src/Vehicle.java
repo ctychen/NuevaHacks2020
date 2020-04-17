@@ -6,7 +6,7 @@ public class Vehicle {
 	boolean vertical;
 	boolean direction;
 	int speed;
-	public static int carNumbers = 1;
+	public static int carNumbers = 3;
 	public static PImage[] frontIcons = new PImage[carNumbers];
 	public static PImage[] backIcons = new PImage[carNumbers];
 	public static PImage[] rightIcons = new PImage[carNumbers];
