@@ -23,7 +23,7 @@ public class ReactionKeySave {
 	public void draw(PApplet g, boolean keys[]) {
 		g.pushStyle();
 		g.fill((float)Math.random()*255, (float)Math.random()*255, (float)Math.random()*255);
-		g.rect(g.width*0.2f, g.height*0.4f, g.width*0.4f, g.height*0.1f);
+		g.rect(g.width*0.25f, g.height*0.4f, g.width*0.5f, g.height*0.1f);
 		g.fill(0);
 		if ((keys[keyCodes[key]] || saved == 1) && saved != -1) { //saved
 			g.text("NICE SAVE, you " + congrats[message], g.width*0.45f, g.height*0.45f);

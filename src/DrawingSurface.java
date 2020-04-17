@@ -228,7 +228,7 @@ public class DrawingSurface extends PApplet {
 			riskBar.draw(this);
 			game.player.draw(this, keys, tx, ty);
 			
-			if (Math.random()<0.001f && thinkFast.size() < 1) //Reaction-based key saves
+			if (Math.random()<0.003f && thinkFast.size() < 1) //Reaction-based key saves
 				thinkFast.add(new ReactionKeySave());
 			
 			for (int i = 0; i < thinkFast.size(); i++) {
