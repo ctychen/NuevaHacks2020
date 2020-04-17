@@ -58,6 +58,8 @@ public class DrawingSurface extends PApplet {
 	
 	public static int phase = BEGINNING;
 	
+	private boolean displayStats = false;
+	
 	public static final int NUMBER_OF_PLAYABLE_CHARACTERS = 6; //How many playable characters are there
 	private static final int CHARACTERS_PER_ROW = 5; //How many playable characters should be listed per row
 	
@@ -217,7 +219,10 @@ public class DrawingSurface extends PApplet {
 			//translate(-tx, -ty);
 		} else if (phase == DEAD) {
 			g.text("HA YOU'RE DEAD!!!! JOKES ON YOU!!!", width/2, height/2);
-			displayStats();
+			if (!displayStats) {
+				displayStats();
+			}
+
 		}
 		redraw();
 	}
@@ -313,7 +318,7 @@ public class DrawingSurface extends PApplet {
 		dialog = pane.createDialog(frame, "Game Over");
 		dialog.setLocation((int)(width/4),(int)(height/2));
 		pane.setLocation((int)(width/4),(int)(height/2));
-		   
+		displayStats = true;
 		dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
 
