@@ -84,26 +84,26 @@ public class Person {
 	public void setImageIcons(PApplet p) {
 		
 		if (!imageIconsSet) {
-			frontStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "front.png");
-			leftStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "left.png");
-			rightStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "right.png");
-			backStill = p.loadImage("people" + FileIO.fileSep + "p" + personID + "back.png");
+			frontStill = p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "front.png");
+			leftStill = p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "left.png");
+			rightStill = p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "right.png");
+			backStill = p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "back.png");
 			
 			frontStepIcons = new PImage[] { 
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "frontstep1.png"),
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "frontstep2.png") 
 				};
 			leftStepIcons = new PImage[] {
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "leftstep1.png"),
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "leftstep2.png")
 			};
 			rightStepIcons = new PImage[] {
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "rightstep1.png"),
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "rightstep2.png")
 			};
 			backStepIcons = new PImage[] {
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
-					p.loadImage("people" + FileIO.fileSep + "p" + personID + "backstep2.png")
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "backstep1.png"),
+					p.loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + personID + "backstep2.png")
 			};
 			// default icon is front-still
 			currentIcon = frontStill;

@@ -86,26 +86,26 @@ public class Pet {
 	
 	public void setImageIcons(PApplet p) {
 		
-		frontStill = p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "front.png");
-		leftStill = p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "left.png");
-		rightStill = p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "right.png");
-		backStill = p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "back.png");
+		frontStill = p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "front.png");
+		leftStill = p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "left.png");
+		rightStill = p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "right.png");
+		backStill = p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "back.png");
 		
 		frontStepIcons = new PImage[] { 
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "frontstep1.png"),
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "frontstep2.png") 
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "frontstep1.png"),
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "frontstep2.png") 
 			};
 		leftStepIcons = new PImage[] {
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "leftstep1.png"),
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "leftstep2.png")
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "leftstep1.png"),
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "leftstep2.png")
 		};
 		rightStepIcons = new PImage[] {
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "rightstep1.png"),
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "rightstep2.png")
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "rightstep1.png"),
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "rightstep2.png")
 		};
 		backStepIcons = new PImage[] {
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "backstep1.png"),
-				p.loadImage("pets" + FileIO.fileSep + "a" + typeID + "backstep2.png")
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "backstep1.png"),
+				p.loadImage(FileIO.path + "pets" + FileIO.fileSep + "a" + typeID + "backstep2.png")
 		};
 		
 		// default icon is right-still

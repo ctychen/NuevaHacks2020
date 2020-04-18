@@ -5,11 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileIO {
 	
 	public static final String fileSep = System.getProperty("file.separator");
 	public static final String lineSep = System.getProperty("line.separator");
+	public static final String path = Paths.get(".").toAbsolutePath().normalize().toString() + fileSep;
 	
 	public static ArrayList<String> reeeeeeeeeeeeeeeeeead(String filename) throws IOException {
 		ArrayList<String> output = new  ArrayList<String>();

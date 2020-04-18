@@ -21,13 +21,13 @@ public class Vehicle {
 	
 	public static void loadCars(PApplet g) {
 		for (int i = 0; i < carNumbers; i++) {
-			frontIcons[i] = g.loadImage("cars" + FileIO.fileSep + "v" + (i+1) + "front.png");
-			backIcons[i] = g.loadImage("cars" + FileIO.fileSep + "v" + (i+1) + "back.png");
+			frontIcons[i] = g.loadImage(FileIO.path + "cars" + FileIO.fileSep + "v" + (i+1) + "front.png");
+			backIcons[i] = g.loadImage(FileIO.path + "cars" + FileIO.fileSep + "v" + (i+1) + "back.png");
 			frontIcons[i].resize((int)(g.width*0.07f+0.5f), (int)(g.width*0.09f+0.5f));
 			backIcons[i].resize((int)(g.width*0.07f+0.5f), (int)(g.width*0.09f+0.5f));
 			
-			leftIcons[i] = g.loadImage("cars" + FileIO.fileSep + "v" + (i+1) + "left.png");
-			rightIcons[i] = g.loadImage("cars" + FileIO.fileSep + "v" + (i+1) + "right.png");
+			leftIcons[i] = g.loadImage(FileIO.path + "cars" + FileIO.fileSep + "v" + (i+1) + "left.png");
+			rightIcons[i] = g.loadImage(FileIO.path + "cars" + FileIO.fileSep + "v" + (i+1) + "right.png");
 			leftIcons[i].resize((int)(g.width*0.1f+0.5f), (int)(g.width*0.12f+0.5f));
 			rightIcons[i].resize((int)(g.width*0.1f+0.5f), (int)(g.width*0.12f+0.5f));
 		}
