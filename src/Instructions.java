@@ -16,7 +16,7 @@ public class Instructions extends PApplet{
 	}
 	
 	public void setup() {
-		how = loadImage("intro.png");
+		how = loadImage(FileIO.path + "intro.png");
 		how.resize(width/2, 2*height/3);
 	}
 	

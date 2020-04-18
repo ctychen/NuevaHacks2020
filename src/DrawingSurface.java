@@ -108,11 +108,11 @@ public class DrawingSurface extends PApplet {
 	// execute once when the program begins
 	public void setup() {
 		for (int i = 0; i < NUMBER_OF_PLAYABLE_CHARACTERS; i++) {
-			picChar[i*2] = loadImage("people" + FileIO.fileSep + "p" + (i+1) + "frontstep1.png");
-			picChar[i*2+1] = loadImage("people" + FileIO.fileSep + "p" + (i+1) + "frontstep2.png");
+			picChar[i*2] = loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + (i+1) + "frontstep1.png");
+			picChar[i*2+1] = loadImage(FileIO.path + "people" + FileIO.fileSep + "p" + (i+1) + "frontstep2.png");
 		}
 		try {
-			File audioFile = new File("sound" + FileIO.fileSep + "run.wav");
+			File audioFile = new File(FileIO.path + "sound" + FileIO.fileSep + "run.wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
 			 
@@ -146,7 +146,7 @@ public class DrawingSurface extends PApplet {
 			
 			if (playSound != null) {
 				try {
-					File audioFile = new File("sound" + FileIO.fileSep + playSound);
+					File audioFile = new File(FileIO.path + "sound" + FileIO.fileSep + playSound);
 					AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
 					AudioFormat format = audioStream.getFormat();
 					 
@@ -262,13 +262,13 @@ public class DrawingSurface extends PApplet {
 	
 	public void showTipScreen() {
 		tipScreens = new PImage[] {
-				this.loadImage("tips" + FileIO.fileSep + "0.png"),
-				this.loadImage("tips" + FileIO.fileSep + "1.png"),
-				this.loadImage("tips" + FileIO.fileSep + "2.png"),
-				this.loadImage("tips" + FileIO.fileSep + "3.png"),
-				this.loadImage("tips" + FileIO.fileSep + "4.png"),
-				this.loadImage("tips" + FileIO.fileSep + "5.png"),
-				this.loadImage("tips" + FileIO.fileSep + "6.png")
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "0.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "1.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "2.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "3.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "4.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "5.png"),
+				this.loadImage(FileIO.path + "tips" + FileIO.fileSep + "6.png")
 			};
 		PImage tip = tipScreens[(int)(Math.random() * tipScreens.length)];
 		if (tip != null) tip.resize((int)(this.width), (int)(this.height));

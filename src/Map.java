@@ -30,20 +30,20 @@ public class Map {
 	
 	public Map(PApplet g) {
 		tiles = new PImage[] { 
-				g.loadImage("terrain" + FileIO.fileSep + "background.png"),      //0
-				g.loadImage("terrain" + FileIO.fileSep + "pathbottom.png"),      //1
-				g.loadImage("terrain" + FileIO.fileSep + "pathbottomleft2.png"), //2
-				g.loadImage("terrain" + FileIO.fileSep + "pathbottomleft1.png"), //3
-				g.loadImage("terrain" + FileIO.fileSep + "pathbottomright2.png"),//4
-				g.loadImage("terrain" + FileIO.fileSep + "pathbottomright1.png"),//5
-				g.loadImage("terrain" + FileIO.fileSep + "pathcenter.png"),      //6
-				g.loadImage("terrain" + FileIO.fileSep + "pathleft.png"),        //7
-				g.loadImage("terrain" + FileIO.fileSep + "pathright.png"),       //8
-				g.loadImage("terrain" + FileIO.fileSep + "pathtop.png"),         //9
-				g.loadImage("terrain" + FileIO.fileSep + "pathtopleft2.png"),    //10
-				g.loadImage("terrain" + FileIO.fileSep + "pathtopleft1.png"),    //11
-				g.loadImage("terrain" + FileIO.fileSep + "pathtopright2.png"),   //12
-				g.loadImage("terrain" + FileIO.fileSep + "pathtopright1.png"),   //13
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "background.png"),      //0
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathbottom.png"),      //1
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathbottomleft2.png"), //2
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathbottomleft1.png"), //3
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathbottomright2.png"),//4
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathbottomright1.png"),//5
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathcenter.png"),      //6
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathleft.png"),        //7
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathright.png"),       //8
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathtop.png"),         //9
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathtopleft2.png"),    //10
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathtopleft1.png"),    //11
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathtopright2.png"),   //12
+				g.loadImage(FileIO.path + "terrain" + FileIO.fileSep + "pathtopright1.png"),   //13
 				};
 		for (PImage e : tiles) {
 			e.resize((int)(g.width*0.05f+0.5f), (int)(g.width*0.05f+0.5f));
@@ -200,7 +200,7 @@ public class Map {
 		}
 			/*
 		g.saveFrame("cache" + FileIO.fileSep + "map.png");
-		bigBoiImage = g.loadImage("cache" + FileIO.fileSep + "map.png");
+		bigBoiImage = g.loadImage(FileIO.path + "cache" + FileIO.fileSep + "map.png");
 		System.out.println("bigboi");
 		} else
 			g.image(bigBoiImage, 0, 0);*/
